@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+    </head>
+    <body>
+        <div class="test-selector"></div>
+        <div id="testId"></div>
+
+        <script src="js/debug/dollar-bill.js?v=.1"></script>
+        <script src="js/debug/dollar-bill-css.js?v=.1"></script>
+
+        <script>
+
+            var testSelector = document.querySelector(".test-selector"),
+                testId = document.getElementById("testId"),
+                $ts = $(".test-selector"),
+                $tid = $("#testId"),
+                $ts2 = $(testSelector),
+                $tid2 = $(testId);
+            
+            testSelector.innerText = $ts.length;
+            testId.innerText = $tid.length;
+
+            console.info($ts.hasClass("test-selector"));
+            
+        </script>
+
+    </body>
+</html>

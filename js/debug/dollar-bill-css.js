@@ -2,27 +2,65 @@
 
     "use strict";
 
-    dollarbill.fn.addClass = function (view, cssClass) {
+    dollarbill.fn.addClass = function (cssClass) {
 
-        if (!view || !cssClass) {
+        if (!cssClass || typeof cssClass !== "string") {
             return;
         }
 
-        if (view.classList) {
+        var elem, i = 0, len = this.length;
 
-            view.classList.add(cssClass);
+        for (; i < len; i++) {
+            elem = this[i];
 
-        } else {
-
-            view.className += " " + cssClass;
-
+            elem.className += " " + cssClass;
         }
 
     };
 
-    dollarbill.fn.hasClass = function () { };
+    dollarbill.fn.hasClass = function (cssClass) {
 
-    dollarbill.fn.removeClass = function () { };
+        if (!cssClass || typeof cssClass !== "string") {
+            return;
+        }
+
+        var className = " " + cssClass + " ",
+			elem, i = 0, len = this.length;
+
+        for (; i < len; i++) {
+            elem = this[i];
+
+            if (elem.nodeType === 1 &&
+                (" " + elem.className + " ")
+                    .replace(this.rclass, " ").indexOf(className) >= 0) {
+                return true;
+            }
+        }
+
+        return false;
+
+    };
+
+    dollarbill.fn.removeClass = function (cssClass) {
+
+        if (!cssClass || typeof cssClass !== "string") {
+            return;
+        }
+
+        var className = " " + cssClass + " ",
+			elem, i = 0, len = this.length;
+
+        for (; i < len; i++) {
+            elem = this[i];
+
+            if (elem.nodeType === 1 &&
+                (" " + elem.className + " ").replace(this.rclass, " ")) {
+
+            }
+        }
+
+
+    };
 
     dollarbill.fn.toggleClass = function () { };
 

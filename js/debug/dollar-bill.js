@@ -7,22 +7,78 @@
 
     "use strict";
 
-    var dollarbill = function (selector) {
+    String.prototype.trim=function(){return this.replace(/^\s+|\s+$/g, '');};
 
-        return new dollarbill.fn.init(customSettings);
+    String.prototype.ltrim=function(){return this.replace(/^\s+/,'');};
+
+    String.prototype.rtrim=function(){return this.replace(/\s+$/,'');};
+
+    String.prototype.fulltrim=function(){return this.replace(/(?:(?:^|\n)\s+|\s+(?:$|\n))/g,'').replace(/\s+/g,' ');};
+
+    var dollarbill = function (selector, context) {
+
+        var db =  new dollarbill.fn.init(selector, context),
+            nodes, i;
+
+        // HANDLE: $(""), $(null), $(undefined), $(false)
+		if ( !selector ) {
+			
+            db.length = 0;
+            return db;
+
+		}
+
+        if ( typeof selector === "string" ) {
+
+            if(context && context.nodeType){
+                nodes = context.querySelectorAll(selector);    
+            }else{
+                nodes = document.querySelectorAll(selector);
+            }
+
+            db.length = nodes.length;
+            db.selector = selector;
+
+            for(i = 0; i < nodes.length; i++){
+                db[i] = nodes[i];
+            }
+
+        }else if ( selector.nodeType ) {
+
+            //if(!selector.length){
+            //    selector = [selector];
+            //}
+
+            db[0] = selector;
+            db.length = 1;
+        }
+
+        return db;
+
     };
 
     dollarbill.fn = dollarbill.prototype = {
 
         constructor: dollarbill,
 
-        init: function (selector) {
-
-
-            return this;
+        init: function () {
+            return this;            
         },
 
         version: "0.0.1",
+
+        length: 0,
+        context: undefined,
+        selector: "",
+        rclass : /[\t\r\n]/g,
+
+        trim: function( text ) {
+	    	return text == null ? "" : text.trim( text );
+    	},
+
+        isArray: function( obj ) {
+		    return Object.prototype.toString.call(obj) === "[object Array]";
+	    },
 
         extend : function () {
 
@@ -59,7 +115,26 @@
 
         merge: function(first, second){},
 
-        each: function(items, callback){},
+        each: function(obj, callback){
+            
+            if(callback === undefined){
+                callback = obj;
+                obj = this;
+            }
+
+            if(!this.isArray(obj)){
+                return;
+            }
+
+            var value,
+                i = 0,
+                length = obj.length;
+
+            for(; i < length; i++){
+                
+            }
+
+        },
 
         map: function(items, callback){},
 
