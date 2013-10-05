@@ -50,46 +50,6 @@
 
     };
 
-    // fn arg can be an object or a function, thanks to handleEvent
-    // read more about the explanation at: http://www.thecssninja.com/javascript/handleevent
-    dollarbill.fn.addEvt = function (el, evt, fn, bubble) {
-
-        bubble = (bubble === true) ? true : false;
-
-        // BBOS6 doesn't support handleEvent, catch and polyfill
-        try {
-            el.addEventListener(evt, fn, bubble);
-        } catch (e) {
-            if (typeof fn == 'object' && fn.handleEvent) {
-                el.addEventListener(evt, function (e) {
-                    // Bind fn as this and set first arg as event object
-                    fn.handleEvent.call(fn, e);
-                }, bubble);
-            } else {
-                throw e;
-            }
-        }
-
-    }
-
-    dollarbill.fn.rmEvt = function (el, evt, fn, bubble) {
-
-        // BBOS6 doesn't support handleEvent, catch and polyfill
-        try {
-            el.removeEventListener(evt, fn, bubble);
-        } catch (e) {
-            if (typeof fn == 'object' && fn.handleEvent) {
-                el.removeEventListener(evt, function (e) {
-                    // Bind fn as this and set first arg as event object
-                    fn.handleEvent.call(fn, e);
-                }, bubble);
-            } else {
-                throw e;
-            }
-        }
-
-    }
-
     dollarbill.fn.checkTransform3dSupport = function () {
 
         var div = document.createElement('div'),
@@ -123,8 +83,8 @@
     };
 
     dollarbill.fn.guid = function () {
-        return MBP.s4() + MBP.s4() + '-' + MBP.s4() + '-' + MBP.s4() + '-' +
-           MBP.s4() + '-' + MBP.s4() + MBP.s4() + MBP.s4();
+        return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' +
+           this.s4() + '-' + this.s4() + this.s4() + this.s4();
     };
 
 
