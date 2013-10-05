@@ -1,8 +1,4 @@
 
-(function (window, undefined) {
-
-    "use strict";
-
     dollarbill.fn.getVendorPropertyName = function (prop) {
 
         var prefixes = ['Moz', 'Webkit', 'O', 'ms'],
@@ -87,5 +83,3 @@
            this.s4() + '-' + this.s4() + this.s4() + this.s4();
     };
 
-
-} (window));

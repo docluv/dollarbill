@@ -1,6 +1,3 @@
-(function (window, undefined) {
-    
-    "use strict";
 
 
     dollarbill.fn.on = function (evt, fn, bubble) {
@@ -22,5 +19,3 @@
     }
 
     dollarbill.fn.trigger = function () { };
-
-}(window));

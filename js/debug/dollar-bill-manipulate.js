@@ -1,8 +1,4 @@
 
-(function (window, undefined) {
-    
-    "use strict";
-
     dollarbill.fn.after = function (content) { };
 
     dollarbill.fn.append = function (content) { };
@@ -33,5 +29,3 @@
 
     dollarbill.fn.text = function (textString) { };
 
-
-} (window));

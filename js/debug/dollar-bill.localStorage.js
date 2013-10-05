@@ -1,8 +1,4 @@
 
-(function (window, undefined) {
-
-    "use strict";
-
     dollarbill.fn.parseLocalStorage = function (key) {
 
         var value = localStorage.getItem(key);
@@ -15,5 +11,3 @@
 
     };
 
-
-} (window));

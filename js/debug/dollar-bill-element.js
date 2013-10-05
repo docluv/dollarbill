@@ -1,6 +1,3 @@
-(function (window, undefined) {
-
-    "use strict";
 
     dollarbill.fn.attr = function () { };
 
@@ -27,5 +24,3 @@
         }
 
     };
-
-} (window));
