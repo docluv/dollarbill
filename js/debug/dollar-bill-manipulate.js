@@ -133,9 +133,61 @@ dollarbill.fn.insertBefore = function (target, source) {
     return this;
 };
 
-dollarbill.fn.prepend = function (content) { };
+dollarbill.fn.prepend = function (elem) {
 
-dollarbill.fn.prependTo = function (target) { };
+    if (!elem) {
+        return this;
+    }
+
+    if (typeof elem === "string") {
+        //assume it is markup, a selector does not really make sense here
+        elem = document.createDocumentFragment(elem);
+    }
+
+    var i = 0,
+        target;
+
+    for (; i < this.length; i++) {
+
+        target = this[0];
+
+        if (target.nodeType === 1 || target.nodeType === 11 || target.nodeType === 9) {
+            target.insertBefore(elem, target.firstChild);
+        }
+    }
+
+    return this;
+
+};
+
+dollarbill.fn.prependTo = function (target) {
+
+    if (!target) {
+        return this;
+    }
+
+    if (typeof target === "string") {
+        //assume it is selector, markup does not really make sense here
+        target = document.querySelectorAll(elem);
+    }
+
+    if (!target.length) {
+        target = [target];
+    }
+
+    var i = 0,
+        elem = this[0]; //only insert the first element in the list for simplicity
+
+    for (; i < target.length; i++) {
+
+        if (target.nodeType === 1 || target.nodeType === 11 || target.nodeType === 9) {
+            target.insertBefore(elem, target.firstChild);
+        }
+    }
+
+    return this;
+
+};
 
 dollarbill.fn.remove = function (c) {
 
