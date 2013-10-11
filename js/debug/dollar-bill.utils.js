@@ -46,6 +46,13 @@
 
     };
 
+    dollarbill.fn.transitionend = {
+        'animation': 'animationend',
+        'webkitAnimation': 'webkitAnimationEnd',
+        'MozAnimation': 'animationend',
+        'OAnimation': 'oAnimationEnd'
+    };
+
     dollarbill.fn.checkTransform3dSupport = function () {
 
         var div = document.createElement('div'),
