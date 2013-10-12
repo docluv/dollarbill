@@ -128,7 +128,38 @@
 
         },
 
-        map: function(items, callback){},
+        map: function(elems, callback){
+
+		var value,
+			i = 0,
+			length = elems.length,
+			isArray = this.isArray( elems ),
+			ret = [];
+
+		    // Go through the array, translating each of the items to their
+		    if ( isArray ) {
+			    for ( ; i < length; i++ ) {
+				    value = callback( elems[ i ], i, arg );
+
+				    if ( value != null ) {
+					    ret[ ret.length ] = value;
+				    }
+			    }
+
+		    // Go through every key on the object,
+		    } else {
+			    for ( i in elems ) {
+				    value = callback( elems[ i ], i, arg );
+
+				    if ( value != null ) {
+					    ret[ ret.length ] = value;
+				    }
+			    }
+		    }
+
+            return ret;
+
+        },
 
         grep: function(items, callback, invert){},
 
