@@ -43,7 +43,7 @@ dollarbill.fn.trigger = function (eventType, extraParameters) {
     var i = 0,
         event = new CustomEvent(eventType, extraParameters);
 
-    for(; i < this.length; i++){
+    for (; i < this.length; i++) {
         elem.dispatchEvent(event);
     }
 

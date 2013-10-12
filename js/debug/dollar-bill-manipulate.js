@@ -1,12 +1,12 @@
 
 dollarbill.fn.after = function (content) {
 
-    if (!source) {
+    if (!content) {
         return this;
     }
 
     if (typeof content === "string") {
-        content = document.createDocumentFragment(content);
+         content = document.createDocumentFragment(content);
     }
 
     for (var i = 0; i < this.length; i++) {
@@ -151,9 +151,11 @@ dollarbill.fn.prepend = function (elem) {
 
         target = this[0];
 
-        if (target.nodeType === 1 || target.nodeType === 11 || target.nodeType === 9) {
+        if (target.nodeType === 1 || target.nodeType === 11 || 
+                target.nodeType === 9) {
             target.insertBefore(elem, target.firstChild);
         }
+
     }
 
     return this;
