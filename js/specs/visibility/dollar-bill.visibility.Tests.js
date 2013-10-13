@@ -1,37 +1,26 @@
 
-module("Dollar Bill Unit Tests", {
+module("Dollar Bill Visibility Unit Tests", {
     setup: function () {
-
-        
-
+        document.body.appendChild(
+            document.createDocumentFragment("<div class='visibility-div'>Visibility</div>")
+        );
     },
     teardown: function () {
-
+        var div = document.querySelector(".visibility-div");
+        div.parent.removeChild(div);
     }
 });
 
 
 
-test("Verify We Have dillar-bill with expected members", function () {
+test("Verify We Have dillar-bill with expected visibility members", function () {
 
     //basic sainty assertions to know members are present
-    ok(dollarbill, "dollarbill object should exist");
-    ok(dollarbill.fn.init, "init function should exist");
-    ok(dollarbill.fn.version, "version should exist");
-    equal(dollarbill.fn.length, 0, "length should exist");
-    ok(dollarbill.fn.rclass, "rclass should exist");
-    equal(dollarbill.fn.selector, "", "selector should exist");
-    ok(dollarbill.fn.trim, "trim function should exist");
-    ok(dollarbill.fn.isArray, "isArray function should exist");
-    ok(dollarbill.fn.extend, "extend function should exist");
-    ok(dollarbill.fn.merge, "merge function should exist");
-    ok(dollarbill.fn.each, "each function should exist");
-    ok(dollarbill.fn.map, "map function should exist");
-    ok(dollarbill.fn.grep, "grep function should exist");
-    ok(dollarbill.fn.noop, "dblTap function should exist");
-    ok(dollarbill.fn.loadScript, "loadScript function should exist");
-});
+    ok(dollarbill.fn.show, "init function should exist");
+    ok(dollarbill.fn.hide, "version should exist");
 
+});
+/*
 test("Verify can a new dollarbill instance and the 1st element is the target element", function () {
 
     var selector = ".operation-body",
@@ -101,3 +90,4 @@ test("Verify can a dollarbill.isArray won't identify an object as an array", fun
 });
 
 
+*/
