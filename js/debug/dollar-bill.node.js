@@ -1,3 +1,4 @@
+//Don't use these methods. They are just something I was experimenting with.
 
     NodeList.prototype.nodeFunctions = function (names) {
 
