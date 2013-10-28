@@ -1,13 +1,12 @@
+var testItem = ".test-subject",
+    testItems = ".test-subjects";
 
 module("Dollar Bill Visibility Unit Tests", {
     setup: function () {
-        document.body.appendChild(
-            document.createDocumentFragment("<div class='visibility-div'>Visibility</div>")
-        );
+
     },
     teardown: function () {
-        var div = document.querySelector(".visibility-div");
-        div.parent.removeChild(div);
+
     }
 });
 
@@ -16,78 +15,114 @@ module("Dollar Bill Visibility Unit Tests", {
 test("Verify We Have dillar-bill with expected visibility members", function () {
 
     //basic sainty assertions to know members are present
-    ok(dollarbill.fn.show, "init function should exist");
-    ok(dollarbill.fn.hide, "version should exist");
-
-});
-/*
-test("Verify can a new dollarbill instance and the 1st element is the target element", function () {
-
-    var selector = ".operation-body",
-        $ob = $(selector);
-
-    equal(typeof $ob, "object", "dollarbill object should exist");
-    equal($ob.length, 1, "dollarbill.length should be 1");
-    equal($ob.selector, selector, "dollarbill.selector should be " + selector);
-    equal($ob[0], document.querySelector(selector), "should be the target node");
+    isFunction(dollarbill.fn.show, "show function should exist");
+    isFunction(dollarbill.fn.hide, "hide should exist");
 
 });
 
-test("Verify can a dollarbill.trim can trim leading and trailing spaces", function () {
+test("Verify show displays a hidden element", function () {
 
-    var testString = " test ",
-        expect = "test",
-        $ob = $(),
-        result = $ob.trim(testString);
+    var $ob = $(testItem),
+        target = document.querySelector(testItem);
 
-    equal(result, expect, "trim should remove leading and trailing spaces");
+    target.style.display = "none";
 
-});
+    $ob.show();
 
-test("Verify can a dollarbill.trim can trim leading space", function () {
+    equal(target.style.display, "block", "should be display = 'block'");
 
-    var testString = " test",
-        expect = "test",
-        $ob = $(),
-        result = $ob.trim(testString);
-
-    equal(result, expect, "trim should remove leading space");
-
+    target.style.display = "";
 });
 
 
-test("Verify can a dollarbill.trim can trim trailing space", function () {
+test("Verify show displays a hidden element with inline-block", function () {
 
-    var testString = "test ",
-        expect = "test",
-        $ob = $(),
-        result = $ob.trim(testString);
+    var $ob = $(testItem),
+        target = document.querySelector(testItem);
 
-    equal(result, expect, "trim should remove trailing space");
+    target.style.display = "none";
 
+    $ob.show("inline-block");
+
+    equal(target.style.display, "inline-block", "should be display = 'inline-block'");
+
+    target.style.display = "";
 });
 
-test("Verify can a dollarbill.isArray can identify an array", function () {
+test("Verify hide sets display to none", function () {
 
-    var testArray = [],
-        expect = true,
-        $ob = $(),
-        result = $ob.isArray(testArray);
+    var $ob = $(testItem),
+        target = document.querySelector(testItem);
 
-    equal(result, expect, "trim should be true");
+    target.style.display = "block";
 
+    $ob.hide();
+
+    equal(target.style.display, "none", "should be display = 'none'");
+
+    target.style.display = "";
 });
 
-test("Verify can a dollarbill.isArray won't identify an object as an array", function () {
+test("Verify show displays a hidden elements", function () {
 
-    var testArray = {},
-        expect = false,
-        $ob = $(),
-        result = $ob.isArray(testArray);
+    var $ob = $(testItems),
+        target = document.querySelectorAll(testItems);
 
-    equal(result, expect, "trim should be false");
+    target[0].style.display = "none";
+    target[1].style.display = "none";
+    target[2].style.display = "none";
 
+    $ob.show();
+
+    equal(target[0].style.display, "block", "should be display = 'block'");
+    equal(target[1].style.display, "block", "should be display = 'block'");
+    equal(target[2].style.display, "block", "should be display = 'block'");
+
+    target[0].style.display = "";
+    target[1].style.display = "";
+    target[2].style.display = "";
+});
+
+test("Verify show displays a hidden elements with inline-block", function () {
+
+    var $ob = $(testItems),
+        target = document.querySelectorAll(testItems);
+
+    target[0].style.display = "none";
+    target[1].style.display = "none";
+    target[2].style.display = "none";
+
+    $ob.show("inline-block");
+
+    equal(target[0].style.display, "inline-block", "should be display = 'inline-block'");
+    equal(target[1].style.display, "inline-block", "should be display = 'inline-block'");
+    equal(target[2].style.display, "inline-block", "should be display = 'inline-block'");
+
+    target[0].style.display = "";
+    target[1].style.display = "";
+    target[2].style.display = "";
 });
 
 
-*/
+test("Verify hide hides a visible elements", function () {
+
+    var $ob = $(testItems),
+        target = document.querySelectorAll(testItems);
+
+    target[0].style.display = "block";
+    target[1].style.display = "block";
+    target[2].style.display = "block";
+
+    $ob.hide();
+
+    equal(target[0].style.display, "none", "should be display = 'none'");
+    equal(target[1].style.display, "none", "should be display = 'none'");
+    equal(target[2].style.display, "none", "should be display = 'none'");
+
+    target[0].style.display = "";
+    target[1].style.display = "";
+    target[2].style.display = "";
+});
+
+
+

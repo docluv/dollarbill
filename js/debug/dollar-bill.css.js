@@ -59,14 +59,14 @@ dollarbill.fn.width = function (val) {
     if (!val) {
 
         if (this.length === 0) {
-            return window.style.height;
+            return window.style.width;
         }
 
-        return this[0].style.height;
+        return this[0].style.width;
     }
 
     if (this.length > 0) {
-        this[0].style.height = val;
+        this[0].style.width = val;
     }
 
     return this;
@@ -79,7 +79,11 @@ dollarbill.fn.innerHeight = function () {
         return window.innerHeight;
     }
 
-    return this[0].innerHeight;
+    if(this[0].innerHeight){
+        return this[0].innerHeight;
+    }else{
+        return undefined;
+    }
 
 };
 
@@ -89,7 +93,12 @@ dollarbill.fn.innerWidth = function () {
         return window.innerWidth;
     }
 
-    return this[0].innerWidth;
+    if(this[0].innerWidth){
+        return this[0].innerWidth;    
+    }else{
+        return undefined;
+    }
+    
 };
 
 dollarbill.fn.offset = function () {

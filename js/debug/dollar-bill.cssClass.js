@@ -5,39 +5,11 @@ dollarbill.fn.removeClass = function (cssClass) {
         return;
     }
 
-    //var i = 0, cur;
-    //elem, 
-
-    for (var i = 0; i < len; i++) {
-        //elem = this[ i ];
+    for (var i = 0; i < this.length; i++) {
 
         this[i].classList.remove(cssClass);
-        //// This expression is here for better compressibility (see addClass)
-        //cur = elem.nodeType === 1 && ( elem.className ?
-        //	( " " + elem.className + " " ).replace( this.rclass, " " ) :
-        //	""
-        //);
 
-        //if ( cur ) {
-        //	j = 0;
-        //	while ( (clazz = classes[j++]) ) {
-        //		// Remove *all* instances
-        //		while ( cur.indexOf( " " + clazz + " " ) >= 0 ) {
-        //			cur = cur.replace( " " + clazz + " ", " " );
-        //		}
-        //	}
-        //	elem.className = value ? jQuery.trim( cur ) : "";
-        //}
     }
-    //only reset the className if the target class exist, keeps brosers from auto repainting the document.
-    //if (this.hasClass(cssClass)) {
-
-    //    this.className = this.className
-    //                        .replace(" " + cssClass + " ", " ")
-    //                        .replace(" " + cssClass, "")
-    //                        .replace(cssClass + " ", "");
-
-    //}
 
     return this;
 
@@ -45,13 +17,22 @@ dollarbill.fn.removeClass = function (cssClass) {
 
 dollarbill.fn.addClass = function (cssClass) {
 
-    if (!cssClass || typeof cssClass !== "string") {
+    var isArray = Object.prototype.toString.call(cssClass) !== "[object Array]";
+
+    if (!cssClass || typeof cssClass !== "string" || !isArray) {
         return;
     }
 
-    for (var i = 0; i < len; i++) {
+    for (var i = 0; i < this.length; i++) {
 
-        this[i].classList.add(cssClass);
+        if(isArray){
+            for(var j = 0; j < cssClass.length; j++){
+                this[i].classList.add(cssClass[j]);
+            }
+        }else{
+            this[i].classList.add(cssClass);
+        }
+
     }
 
     return this;
@@ -64,7 +45,7 @@ dollarbill.fn.hasClass = function (cssClass) {
         return this;
     }
 
-    this[0].classList.contains(cssClass);
+    return this[0].classList.contains(cssClass);
 
 };
 
@@ -74,7 +55,7 @@ dollarbill.fn.toggleClass = function (cssClass) {
         return;
     }
 
-    for (var i = 0; i < len; i++) {
+    for (var i = 0; i < this.length; i++) {
 
         this[i].classList.toggle(cssClass);
     }

@@ -1,25 +1,4 @@
-
-    dollarbill.fn.getVendorPropertyName = function (prop) {
-
-        var prefixes = ['Moz', 'Webkit', 'O', 'ms'],
-                vendorProp, i,
-                prop_ = prop.charAt(0).toUpperCase() + prop.substr(1);
-
-        if (prop in this.div.style) {
-            return prop;
-        }
-
-        for (i = 0; i < prefixes.length; ++i) {
-
-            vendorProp = prefixes[i] + prop_;
-
-            if (vendorProp in this.div.style) {
-                return vendorProp;
-            }
-
-        }
-    };
-
+//stole this from the mobile boilerplate source code
     dollarbill.fn.hideURLBar = function (options) {
 
         var win = window,
@@ -46,10 +25,40 @@
 
     };
 
-    dollarbill.fn.transitionend = {
+    dollarbill.fn.getVendorPropertyName = function (prop) {
+
+        var prefixes = ['Moz', 'Webkit', 'O', 'ms'],
+                vendorProp, i,
+                prop_ = prop.charAt(0).toUpperCase() + prop.substr(1);
+
+        if (prop in this.div.style) {
+            return prop;
+        }
+
+        for (i = 0; i < prefixes.length; ++i) {
+
+            vendorProp = prefixes[i] + prop_;
+
+            if (vendorProp in this.div.style) {
+                return vendorProp;
+            }
+
+        }
+    };
+
+    dollarbill.fn.transitionEnd = {
+            'MozTransition': 'transitionend',
+            'OTransition': 'oTransitionEnd',
+            'WebkitTransition': 'webkitTransitionEnd',
+            'msTransition': 'MSTransitionEnd',
+            'transition': 'transitionend'
+    };
+
+    dollarbill.fn.animationEnd = {
         'animation': 'animationend',
         'webkitAnimation': 'webkitAnimationEnd',
         'MozAnimation': 'animationend',
+        'msAnimation': 'MSAnimation',
         'OAnimation': 'oAnimationEnd'
     };
 
@@ -79,6 +88,7 @@
 
     };
 
+    //create a Guid, methods come as a package :)
     dollarbill.fn.s4 = function () {
         return Math.floor((1 + Math.random()) * 0x10000)
                .toString(16)

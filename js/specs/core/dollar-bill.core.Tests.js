@@ -15,22 +15,57 @@ module("Dollar Bill Unit Tests", {
 test("Verify We Have dillar-bill with expected members", function () {
 
     //basic sainty assertions to know members are present
-    ok(dollarbill, "dollarbill object should exist");
-    ok(dollarbill.fn.init, "init function should exist");
+    isFunction(dollarbill, "dollarbill object should exist");
+    isFunction(dollarbill.fn.init, "init function should exist");
     ok(dollarbill.fn.version, "version should exist");
     equal(dollarbill.fn.length, 0, "length should exist");
     ok(dollarbill.fn.rclass, "rclass should exist");
     equal(dollarbill.fn.selector, "", "selector should exist");
-    ok(dollarbill.fn.trim, "trim function should exist");
-    ok(dollarbill.fn.isArray, "isArray function should exist");
-    ok(dollarbill.fn.extend, "extend function should exist");
-    ok(dollarbill.fn.merge, "merge function should exist");
-    ok(dollarbill.fn.each, "each function should exist");
-    ok(dollarbill.fn.map, "map function should exist");
-    ok(dollarbill.fn.grep, "grep function should exist");
-    ok(dollarbill.fn.noop, "dblTap function should exist");
-    ok(dollarbill.fn.loadScript, "loadScript function should exist");
+    isFunction(dollarbill.fn.trim, "trim function should exist");
+    isFunction(dollarbill.fn.isArray, "isArray function should exist");
+    isFunction(dollarbill.fn.extend, "extend function should exist");
+    isFunction(dollarbill.fn.merge, "merge function should exist");
+    isFunction(dollarbill.fn.each, "each function should exist");
+    isFunction(dollarbill.fn.map, "map function should exist");
+    isFunction(dollarbill.fn.grep, "grep function should exist");
+    isFunction(dollarbill.fn.noop, "dblTap function should exist");
+    isFunction(dollarbill.fn.loadScript, "loadScript function should exist");
 });
+
+test("Verify a new dollarbill instance with no selector has expected member values", function () {
+
+    var selector = "",
+        length = 0,
+        $ob = $();
+
+    equal($ob.selector, selector, "selector should be empty string");
+    equal($ob.length, length, "length should be 0");
+    equal($ob[0], undefined, "$ob[0] should be undefined");
+    
+});
+
+test("Verify a new dollarbill instance with selector for multiple nodes has expected member values", function () {
+
+    var selector = ".test-nodes",
+        length = 3,
+        divs = document.createElement("div"),
+        firstNode, $ob;
+
+    divs.classList.add("test-nodes");
+    document.body.appendChild(divs);
+    document.body.appendChild(divs);
+    document.body.appendChild(divs);
+
+    firstNode = document.querySelector(selector)
+
+    $ob = $(selector);
+
+    equal($ob.selector, selector, "selector should be " + selector);
+    equal($ob.length, length, "length should be " + length);
+    equal($ob[0], firstNode, "$ob[0] should be known element");
+
+});
+
 
 test("Verify can a new dollarbill instance and the 1st element is the target element", function () {
 
@@ -65,7 +100,6 @@ test("Verify can a dollarbill.trim can trim leading space", function () {
     equal(result, expect, "trim should remove leading space");
 
 });
-
 
 test("Verify can a dollarbill.trim can trim trailing space", function () {
 

@@ -1,4 +1,8 @@
 
+var targetSelector = ".target",
+    testClass = "test-class",
+    target = document.querySelector(targetSelector);
+
 module("Dollar Bill Unit Tests", {
     setup: function () {
 
@@ -11,92 +15,69 @@ module("Dollar Bill Unit Tests", {
 });
 
 
-
 test("Verify We Have dillar-bill with expected members", function () {
 
     //basic sainty assertions to know members are present
-    ok(dollarbill, "dollarbill object should exist");
-    ok(dollarbill.fn.init, "init function should exist");
-    ok(dollarbill.fn.version, "version should exist");
-    equal(dollarbill.fn.length, 0, "length should exist");
-    ok(dollarbill.fn.rclass, "rclass should exist");
-    equal(dollarbill.fn.selector, "", "selector should exist");
-    ok(dollarbill.fn.trim, "trim function should exist");
-    ok(dollarbill.fn.isArray, "isArray function should exist");
-    ok(dollarbill.fn.extend, "extend function should exist");
-    ok(dollarbill.fn.merge, "merge function should exist");
-    ok(dollarbill.fn.each, "each function should exist");
-    ok(dollarbill.fn.map, "map function should exist");
-    ok(dollarbill.fn.grep, "grep function should exist");
-    ok(dollarbill.fn.noop, "dblTap function should exist");
-    ok(dollarbill.fn.loadScript, "loadScript function should exist");
-});
-
-test("Verify can a new dollarbill instance and the 1st element is the target element", function () {
-
-    var selector = ".operation-body",
-        $ob = $(selector);
-
-    equal(typeof $ob, "object", "dollarbill object should exist");
-    equal($ob.length, 1, "dollarbill.length should be 1");
-    equal($ob.selector, selector, "dollarbill.selector should be " + selector);
-    equal($ob[0], document.querySelector(selector), "should be the target node");
+    isFunction(dollarbill.fn.removeClass, "removeClass function should exist");
+    isFunction(dollarbill.fn.addClass, "addClass function should exist");
+    isFunction(dollarbill.fn.hasClass, "hasClass function should exist");
+    isFunction(dollarbill.fn.toggleClass, "toggleClass function should exist");
 
 });
 
-test("Verify can a dollarbill.trim can trim leading and trailing spaces", function () {
+test("Verify removeClass removes the testClass", function () {
 
-    var testString = " test ",
-        expect = "test",
-        $ob = $(),
-        result = $ob.trim(testString);
+    target.classList.add(testClass);
 
-    equal(result, expect, "trim should remove leading and trailing spaces");
+    var $ob = $(targetSelector);
 
-});
+    $ob.removeClass(testClass);
 
-test("Verify can a dollarbill.trim can trim leading space", function () {
-
-    var testString = " test",
-        expect = "test",
-        $ob = $(),
-        result = $ob.trim(testString);
-
-    equal(result, expect, "trim should remove leading space");
+    equal(target.classList.contains(testClass), false, "should not contain " + testClass);
 
 });
 
+test("Verify addClass removes the testClass", function () {
 
-test("Verify can a dollarbill.trim can trim trailing space", function () {
+    var $ob = $(targetSelector);
 
-    var testString = "test ",
-        expect = "test",
-        $ob = $(),
-        result = $ob.trim(testString);
+    $ob.addClass(testClass);
 
-    equal(result, expect, "trim should remove trailing space");
+    equal(target.classList.contains(testClass), true, "should contain " + testClass);
 
+    target.classList.remove(testClass);
 });
 
-test("Verify can a dollarbill.isArray can identify an array", function () {
+test("Verify hasClass returns true for the testClass", function () {
 
-    var testArray = [],
-        expect = true,
-        $ob = $(),
-        result = $ob.isArray(testArray);
+    target.classList.add(testClass);
 
-    equal(result, expect, "trim should be true");
+    var $ob = $(targetSelector);
 
+    equal($ob.hasClass(testClass), true, "should contain " + testClass);
+    
+    target.classList.remove(testClass);
 });
 
-test("Verify can a dollarbill.isArray won't identify an object as an array", function () {
+test("Verify hasClass returns false for the no class", function () {
 
-    var testArray = {},
-        expect = false,
-        $ob = $(),
-        result = $ob.isArray(testArray);
+    var $ob = $(targetSelector);
 
-    equal(result, expect, "trim should be false");
+    equal($ob.hasClass(testClass), false, "should not contain " + testClass);
+    
+});
+
+test("Verify toggleClass add & removes the testClass", function () {
+
+    var $ob = $(targetSelector);
+
+    $ob.toggleClass(testClass);
+
+    equal(target.classList.contains(testClass), true, "should contain " + testClass);
+
+    $ob.toggleClass(testClass);
+
+    equal(target.classList.contains(testClass), false, "should not contain " + testClass);
 
 });
 

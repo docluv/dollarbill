@@ -1,4 +1,8 @@
 
+var targetSelector = ".target",
+    testClass = "test-class",
+    target = document.querySelector(targetSelector);
+
 module("Dollar Bill Unit Tests", {
     setup: function () {
 
@@ -11,93 +15,97 @@ module("Dollar Bill Unit Tests", {
 });
 
 
-
 test("Verify We Have dillar-bill with expected members", function () {
 
-    //basic sainty assertions to know members are present
-    ok(dollarbill, "dollarbill object should exist");
-    ok(dollarbill.fn.init, "init function should exist");
-    ok(dollarbill.fn.version, "version should exist");
-    equal(dollarbill.fn.length, 0, "length should exist");
-    ok(dollarbill.fn.rclass, "rclass should exist");
-    equal(dollarbill.fn.selector, "", "selector should exist");
-    ok(dollarbill.fn.trim, "trim function should exist");
-    ok(dollarbill.fn.isArray, "isArray function should exist");
-    ok(dollarbill.fn.extend, "extend function should exist");
-    ok(dollarbill.fn.merge, "merge function should exist");
-    ok(dollarbill.fn.each, "each function should exist");
-    ok(dollarbill.fn.map, "map function should exist");
-    ok(dollarbill.fn.grep, "grep function should exist");
-    ok(dollarbill.fn.noop, "dblTap function should exist");
-    ok(dollarbill.fn.loadScript, "loadScript function should exist");
-});
-
-test("Verify can a new dollarbill instance and the 1st element is the target element", function () {
-
-    var selector = ".operation-body",
-        $ob = $(selector);
-
-    equal(typeof $ob, "object", "dollarbill object should exist");
-    equal($ob.length, 1, "dollarbill.length should be 1");
-    equal($ob.selector, selector, "dollarbill.selector should be " + selector);
-    equal($ob[0], document.querySelector(selector), "should be the target node");
+        //basic sainty assertions to know members are present
+    isFunction(dollarbill.fn.css, "css function should exist");
+    isFunction(dollarbill.fn.height, "height function should exist");
+    isFunction(dollarbill.fn.width, "width function should exist");
+    isFunction(dollarbill.fn.innerHeight, "innerHeight function should exist");
+    isFunction(dollarbill.fn.innerWidth, "innerWidth function should exist");
+    isFunction(dollarbill.fn.offset, "offset function should exist");
+    isFunction(dollarbill.fn.outerHeight, "outerHeight function should exist");
+    isFunction(dollarbill.fn.outerWidth, "outerWidth function should exist");
+    isFunction(dollarbill.fn.position, "position function should exist");
 
 });
 
-test("Verify can a dollarbill.trim can trim leading and trailing spaces", function () {
+test("Verify height returns a known height", function () {
 
-    var testString = " test ",
-        expect = "test",
-        $ob = $(),
-        result = $ob.trim(testString);
+    var height = "100px";
 
-    equal(result, expect, "trim should remove leading and trailing spaces");
+    target.style.height = height;
 
-});
+    var $ob = $(targetSelector);
 
-test("Verify can a dollarbill.trim can trim leading space", function () {
+    equal($ob.height(), height, "dollarbill.height should be " + height);
 
-    var testString = " test",
-        expect = "test",
-        $ob = $(),
-        result = $ob.trim(testString);
-
-    equal(result, expect, "trim should remove leading space");
+    target.style.height = "";
 
 });
 
+test("Verify width returns a known width", function () {
 
-test("Verify can a dollarbill.trim can trim trailing space", function () {
+    var width = "100px";
 
-    var testString = "test ",
-        expect = "test",
-        $ob = $(),
-        result = $ob.trim(testString);
+    target.style.width = width;
 
-    equal(result, expect, "trim should remove trailing space");
+    var $ob = $(targetSelector);
 
-});
+    equal($ob.width(), width, "dollarbill.height should be " + width);
 
-test("Verify can a dollarbill.isArray can identify an array", function () {
-
-    var testArray = [],
-        expect = true,
-        $ob = $(),
-        result = $ob.isArray(testArray);
-
-    equal(result, expect, "trim should be true");
+    target.style.width = "";
 
 });
 
-test("Verify can a dollarbill.isArray won't identify an object as an array", function () {
+test("Verify height sets known height", function () {
 
-    var testArray = {},
-        expect = false,
-        $ob = $(),
-        result = $ob.isArray(testArray);
+    var height = "100px";
 
-    equal(result, expect, "trim should be false");
+    target.style.height = "";
+
+    var $ob = $(targetSelector);
+
+    $ob.height(height);
+
+    equal(target.style.height, height, "dollarbill.height should be " + height);
+
+    target.style.height = "";
 
 });
+
+test("Verify width sets known width", function () {
+
+    var width = "100px";
+
+    target.style.width = "";
+
+    var $ob = $(targetSelector);
+
+    $ob.width(width);
+
+    equal(target.style.width, width, "dollarbill.height should be " + width);
+
+    target.style.width = "";
+
+});
+
+
+test("Verify innerHeight returns a known height", function () {
+
+    var $ob = $(window);
+
+    equal($ob.innerHeight(), window.style.innerHeight, "dollarbill.height should be " + height);
+    
+});
+
+test("Verify innerWidth returns a known width", function () {
+
+    var $ob = $(targetSelector);
+
+    equal($ob.innerWidth(), window.style.innerWidth, "dollarbill.height should be " + width);
+
+});
+
 
 

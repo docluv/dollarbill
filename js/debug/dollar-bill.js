@@ -10,12 +10,13 @@
     var dollarbill = function (selector, context) {
 
         var db =  new dollarbill.fn.init(selector, context),
+            proto = (db.__proto__) ? "__proto__" : "prototype",
             nodes, i;
 
         // HANDLE: $(""), $(null), $(undefined), $(false)
 		if ( !selector ) {
 			
-            db.length = 0;
+            db[proto].length = 0;
             return db;
 
 		}
@@ -28,8 +29,8 @@
                 nodes = document.querySelectorAll(selector);
             }
 
-            db.length = nodes.length;
-            db.selector = selector;
+            db[proto].length = nodes.length;
+            db[proto].selector = selector;
 
             for(i = 0; i < nodes.length; i++){
                 db[i] = nodes[i];
@@ -42,7 +43,7 @@
             //}
 
             db[0] = selector;
-            db.length = 1;
+            db[proto].length = (!selector.length) ? 1 : selector.length;
         }
 
         return db;
@@ -54,6 +55,10 @@
         constructor: dollarbill,
 
         init: function () {
+
+            //this.length = 5;
+            //this.selector = ".test";
+
             return this;            
         },
 
