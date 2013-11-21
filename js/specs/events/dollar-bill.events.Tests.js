@@ -1,5 +1,3 @@
-var targetSelector = ".target";
-
 
 module("Dollar Bill Unit Tests", {
     setup: function () {
@@ -13,75 +11,93 @@ module("Dollar Bill Unit Tests", {
 });
 
 
+
 test("Verify We Have dillar-bill with expected members", function () {
 
-    isFunction(dollarbill.fn.on, "on function should exist");
-    isFunction(dollarbill.fn.off, "off function should exist");
-    isFunction(dollarbill.fn.trigger, "trigger function should exist");
+    //basic sainty assertions to know members are present
+    ok(dollarbill, "dollarbill object should exist");
+    ok(dollarbill.fn.init, "init function should exist");
+    ok(dollarbill.fn.version, "version should exist");
+    equal(dollarbill.fn.length, 0, "length should exist");
+    ok(dollarbill.fn.rclass, "rclass should exist");
+    equal(dollarbill.fn.selector, "", "selector should exist");
+    ok(dollarbill.fn.trim, "trim function should exist");
+    ok(dollarbill.fn.isArray, "isArray function should exist");
+    ok(dollarbill.fn.extend, "extend function should exist");
+    ok(dollarbill.fn.merge, "merge function should exist");
+    ok(dollarbill.fn.each, "each function should exist");
+    ok(dollarbill.fn.map, "map function should exist");
+    ok(dollarbill.fn.grep, "grep function should exist");
+    ok(dollarbill.fn.noop, "dblTap function should exist");
+    ok(dollarbill.fn.loadScript, "loadScript function should exist");
+});
+
+test("Verify can a new dollarbill instance and the 1st element is the target element", function () {
+
+    var selector = ".operation-body",
+        $ob = $(selector);
+
+    equal(typeof $ob, "object", "dollarbill object should exist");
+    equal($ob.length, 1, "dollarbill.length should be 1");
+    equal($ob.selector, selector, "dollarbill.selector should be " + selector);
+    equal($ob[0], document.querySelector(selector), "should be the target node");
 
 });
 
-test("null or undefined handler", function() {
-	expect(2);
-	// Supports Fixes bug #7229
-	try {
-		$(targetSelector).on( "click", null );
-		ok(true, "Passing a null handler will not throw an exception");
-	} catch ( e ) {}
+test("Verify can a dollarbill.trim can trim leading and trailing spaces", function () {
 
-	try {
-		$(targetSelector).on( "click", undefined );
-		ok(true, "Passing an undefined handler will not throw an exception");
-	} catch ( e ) {}
-});
+    var testString = " test ",
+        expect = "test",
+        $ob = $(),
+        result = $ob.trim(testString);
 
-test("on() with non-null,defined data", function() {
-
-	expect(1);
-
-	var handler = function( event, data ) {
-		equal( data, 0, "non-null, defined data (zero) is correctly passed" );
-	},
-    $target = dollarbill(targetSelector);
-
-	$target.on("foo.on", handler);
-
-	$target.trigger("foo", 0);
-
-	$target.off("foo.on", handler);
+    equal(result, expect, "trim should remove leading and trailing spaces");
 
 });
 
-test("trigger() should cause the event handler to execute", function () {
+test("Verify can a dollarbill.trim can trim leading space", function () {
 
-    var count = 0,
-        $target = dollarbill(targetSelector);
+    var testString = " test",
+        expect = "test",
+        $ob = $(),
+        result = $ob.trim(testString);
 
-    $target.on("foo", function () {
-        count++;
-    });
-
-    $target.trigger("foo");
-
-    equal(count, 1, "should be 1");
-
-    $target.off("foo", handler);
+    equal(result, expect, "trim should remove leading space");
 
 });
 
-test("off() should remove the event binding", function () {
 
-    var count = 0,
-        $target = dollarbill(targetSelector);
+test("Verify can a dollarbill.trim can trim trailing space", function () {
 
-    $target.on("foo", function anon() {
-        count++;
-    });
+    var testString = "test ",
+        expect = "test",
+        $ob = $(),
+        result = $ob.trim(testString);
 
-    $target.off("foo", anon)
-            .trigger("foo");
-
-    equal(count, 0, "should be 1");
+    equal(result, expect, "trim should remove trailing space");
 
 });
+
+test("Verify can a dollarbill.isArray can identify an array", function () {
+
+    var testArray = [],
+        expect = true,
+        $ob = $(),
+        result = $ob.isArray(testArray);
+
+    equal(result, expect, "trim should be true");
+
+});
+
+test("Verify can a dollarbill.isArray won't identify an object as an array", function () {
+
+    var testArray = {},
+        expect = false,
+        $ob = $(),
+        result = $ob.isArray(testArray);
+
+    equal(result, expect, "trim should be false");
+
+});
+
 

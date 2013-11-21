@@ -191,14 +191,16 @@ dollarbill.fn.prependTo = function (target) {
 
 };
 
-dollarbill.fn.remove = function (c) {
+dollarbill.fn.remove = function () {
 
-    if (!c.length) {
-        c = [c];
-    }
+    var i, target, ele;
 
-    for (var i = 0; i < c.length; i++) {
-        c.parentNode.removeChild(c);
+    for (i = 0; i < this.length; i++) {
+
+        target = this[i];
+        ele = target.parentNode.removeChild(target);
+        ele = null;
+
     }
 
     return this;

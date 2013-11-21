@@ -7,7 +7,13 @@ dollarbill.fn.removeClass = function (cssClass) {
 
     for (var i = 0; i < this.length; i++) {
 
-        this[i].classList.remove(cssClass);
+        var classes = cssClass.split(" ");
+
+        for (var j = 0; j < classes.length; j++) {
+            if (classes[j] !== "") {
+                this[i].classList.remove(classes[j]);
+            }
+        }
 
     }
 
@@ -17,22 +23,18 @@ dollarbill.fn.removeClass = function (cssClass) {
 
 dollarbill.fn.addClass = function (cssClass) {
 
-    var isArray = Object.prototype.toString.call(cssClass) !== "[object Array]";
-
-    if (!cssClass || typeof cssClass !== "string" || !isArray) {
+    if (!cssClass || typeof cssClass !== "string") {
         return;
     }
 
-    for (var i = 0; i < this.length; i++) {
+    for (var i = 0; i < len; i++) {
+        var classes = cssClass.split(" ");
 
-        if(isArray){
-            for(var j = 0; j < cssClass.length; j++){
-                this[i].classList.add(cssClass[j]);
+        for (var j = 0; j < classes.length; j++) {
+            if (classes[j] !== "") {
+                this[i].classList.add(classes[j]);
             }
-        }else{
-            this[i].classList.add(cssClass);
         }
-
     }
 
     return this;
@@ -45,7 +47,7 @@ dollarbill.fn.hasClass = function (cssClass) {
         return this;
     }
 
-    return this[0].classList.contains(cssClass);
+    this[0].classList.contains(cssClass);
 
 };
 
@@ -55,7 +57,7 @@ dollarbill.fn.toggleClass = function (cssClass) {
         return;
     }
 
-    for (var i = 0; i < this.length; i++) {
+    for (var i = 0; i < len; i++) {
 
         this[i].classList.toggle(cssClass);
     }

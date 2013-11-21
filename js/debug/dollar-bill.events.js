@@ -28,8 +28,6 @@ dollarbill.fn.on = function (evt, fn, bubble) {
 
 dollarbill.fn.off = function (evt, fn, bubble) {
 
-    bubble = (bubble === true) ? true : false;
-
     for (var i = 0; i < this.length; i++) {
         this[i].removeEventListener(evt, fn, bubble);
     }

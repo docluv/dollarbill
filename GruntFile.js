@@ -31,7 +31,9 @@ module.exports = function (grunt) {
                 'js/debug/dollar-bill.css.js',
                 'js/debug/dollar-bill.element.js',
                 'js/debug/dollar-bill.events.js',
-                'js/debug/dollar-bill.manipulate.js'
+                'js/debug/dollar-bill.manipulate.js',
+                'js/debug/dollar-bill.load.js',
+                'js/debug/dollar-bill.utils.js'
                 ],
                 dest: 'js/dollarbill.min.js'
             }
@@ -39,11 +41,11 @@ module.exports = function (grunt) {
         }
     });
 
-  //  grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
  //   grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-qunit');
+  //  grunt.loadNpmTasks('grunt-contrib-qunit');
 
     // Default task.
-    grunt.registerTask('default', [/*'jshint', 'uglify'*/ "qunit"]);
+    grunt.registerTask('default', [/*'jshint', */'uglify' /* "qunit" */]);
 
 };

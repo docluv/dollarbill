@@ -1,4 +1,4 @@
-
+//TODO: make it support an object of properties and values
 dollarbill.fn.css = function (propertyName, value) {
 
     //have to assume the 1st item in the collection
@@ -59,14 +59,14 @@ dollarbill.fn.width = function (val) {
     if (!val) {
 
         if (this.length === 0) {
-            return window.style.width;
+            return window.style.clientWidth;
         }
 
-        return this[0].style.width;
+        return this[0].style.clientWidth;
     }
 
     if (this.length > 0) {
-        this[0].style.width = val;
+        this[0].style.clientWidth = val;
     }
 
     return this;
@@ -79,11 +79,7 @@ dollarbill.fn.innerHeight = function () {
         return window.innerHeight;
     }
 
-    if(this[0].innerHeight){
-        return this[0].innerHeight;
-    }else{
-        return undefined;
-    }
+    return this[0].innerHeight;
 
 };
 
@@ -93,12 +89,7 @@ dollarbill.fn.innerWidth = function () {
         return window.innerWidth;
     }
 
-    if(this[0].innerWidth){
-        return this[0].innerWidth;    
-    }else{
-        return undefined;
-    }
-    
+    return this[0].offsetWidth;
 };
 
 dollarbill.fn.offset = function () {
@@ -122,7 +113,7 @@ dollarbill.fn.outerHeight = function () {
         return window.outerHeight;
     }
 
-    return this[0].outerHeight;
+    return this[0].getBoundingClientRect().height;
 
 };
 
@@ -132,7 +123,7 @@ dollarbill.fn.outerWidth = function () {
         return window.outerWidth;
     }
 
-    return this[0].outerWidth;
+    return this[0].getBoundingClientRect().width;
 
 };
 
