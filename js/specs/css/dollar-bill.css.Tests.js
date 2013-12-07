@@ -66,7 +66,6 @@ test("Verify can a dollarbill.trim can trim leading space", function () {
 
 });
 
-
 test("Verify can a dollarbill.trim can trim trailing space", function () {
 
     var testString = "test ",
