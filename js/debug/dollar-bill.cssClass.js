@@ -27,7 +27,7 @@ dollarbill.fn.addClass = function (cssClass) {
         return;
     }
 
-    for (var i = 0; i < len; i++) {
+    for (var i = 0; i < this.length; i++) {
         var classes = cssClass.split(" ");
 
         for (var j = 0; j < classes.length; j++) {
@@ -57,7 +57,7 @@ dollarbill.fn.toggleClass = function (cssClass) {
         return;
     }
 
-    for (var i = 0; i < len; i++) {
+    for (var i = 0; i < this.length; i++) {
 
         this[i].classList.toggle(cssClass);
     }

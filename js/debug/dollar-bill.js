@@ -2,7 +2,6 @@
 //utility methods based on jQuery's example.
 ;
 
-
 (function (window, undefined) {
 
     "use strict";
@@ -10,13 +9,12 @@
     var dollarbill = function (selector, context) {
 
         var db =  new dollarbill.fn.init(selector, context),
-            proto = (db.__proto__) ? "__proto__" : "prototype",
             nodes, i;
 
         // HANDLE: $(""), $(null), $(undefined), $(false)
 		if ( !selector ) {
 			
-            db[proto].length = 0;
+            db.length = 0;
             return db;
 
 		}
@@ -29,8 +27,8 @@
                 nodes = document.querySelectorAll(selector);
             }
 
-            db[proto].length = nodes.length;
-            db[proto].selector = selector;
+            db.length = nodes.length;
+            db.selector = selector;
 
             for(i = 0; i < nodes.length; i++){
                 db[i] = nodes[i];
@@ -43,7 +41,7 @@
             //}
 
             db[0] = selector;
-            db[proto].length = (!selector.length) ? 1 : selector.length;
+            db.length = (!selector.length) ? 1 : selector.length;
         }
 
         return db;
@@ -62,7 +60,7 @@
             return this;            
         },
 
-        version: "0.0.1",
+        version: "0.0.2",
 
         length: 0,
         context: undefined,
@@ -84,6 +82,7 @@
                 name,
                 copy,
                 options,
+                src,
                 length = arguments.length;
 
             for (i = 1; i < length; i++) {

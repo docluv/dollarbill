@@ -3,9 +3,10 @@
 
         var prefixes = ['Moz', 'Webkit', 'O', 'ms'],
                 vendorProp, i,
+                div = document.createElement('div'),
                 prop_ = prop.charAt(0).toUpperCase() + prop.substr(1);
 
-        if (prop in this.div.style) {
+        if (prop in div.style) {
             return prop;
         }
 
@@ -13,7 +14,7 @@
 
             vendorProp = prefixes[i] + prop_;
 
-            if (vendorProp in this.div.style) {
+            if (vendorProp in div.style) {
                 return vendorProp;
             }
 

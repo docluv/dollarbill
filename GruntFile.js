@@ -36,7 +36,20 @@ module.exports = function (grunt) {
                 'js/debug/dollar-bill.utils.js'
                 ],
                 dest: 'js/dollarbill.min.js'
+            },
+            dollarbillMovie: {
+                src: [
+                'js/debug/dollar-bill.js',
+                'js/debug/dollar-bill.localStorage.js',
+                'js/debug/dollar-bill.cssClass.js',
+                'js/debug/dollar-bill.visibility.js',
+                'js/debug/dollar-bill.utils.js',
+                'js/debug/dollar-bill.load.js',
+                'js/debug/dollar-bill.utils.js'
+                ],
+                dest: 'js/movie/dollarbill.min.js'
             }
+
 
         }
     });
