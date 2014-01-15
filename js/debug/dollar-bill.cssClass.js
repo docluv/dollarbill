@@ -47,7 +47,7 @@ dollarbill.fn.hasClass = function (cssClass) {
         return this;
     }
 
-    this[0].classList.contains(cssClass);
+    return this[0].classList.contains(cssClass);
 
 };
 
