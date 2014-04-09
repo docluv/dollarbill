@@ -75,40 +75,6 @@
 		    return Object.prototype.toString.call(obj) === "[object Array]";
 	    },
 
-        extend : function () {
-
-            var target = arguments[0] || {},
-                i = 1,
-                name,
-                copy,
-                options,
-                src,
-                length = arguments.length;
-
-            for (i = 1; i < length; i++) {
-                // Only deal with non-null/undefined values
-                if ((options = arguments[i]) !== null) {
-                    // Extend the base object
-                    for (name in options) {
-                        src = target[name];
-                        copy = options[name];
-
-                        // Prevent never-ending loop
-                        if (target === copy) {
-                            continue;
-                        }
-
-                        if (copy !== undefined) {
-                            target[name] = copy;
-                        }
-                    }
-                }
-            }
-
-            return target;
-
-        },
-
         merge: function(first, second){},
 
         each: function(obj, callback){
@@ -186,7 +152,13 @@
     		return ret;
         },
 
-        noop: function(){}
+        noop: function(){},
+
+        testExtend: function(){
+            
+            console.log(this.extend);
+
+        }
         
     };
 

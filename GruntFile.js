@@ -10,7 +10,7 @@ module.exports = function (grunt) {
             options: {
                 browser: true
             },
-            files: ['Gruntfile.js', 'js/debug/*.js']
+            files: ['Gruntfile.js', 'js/dev/*.js']
         },
         uglify: {
             options: {
@@ -23,29 +23,29 @@ module.exports = function (grunt) {
 
             dollarbill: {
                 src: [
-                'js/debug/dollar-bill.js',
-                'js/debug/dollar-bill.localStorage.js',
-                'js/debug/dollar-bill.cssClass.js',
-                'js/debug/dollar-bill.visibility.js',
-                'js/debug/dollar-bill.utils.js',
-                'js/debug/dollar-bill.css.js',
-                'js/debug/dollar-bill.element.js',
-                'js/debug/dollar-bill.events.js',
-                'js/debug/dollar-bill.manipulate.js',
-                'js/debug/dollar-bill.load.js',
-                'js/debug/dollar-bill.utils.js'
+                'js/dev/dollar-bill.js',
+                'js/dev/dollar-bill.localStorage.js',
+                'js/dev/dollar-bill.cssClass.js',
+                'js/dev/dollar-bill.visibility.js',
+                'js/dev/dollar-bill.utils.js',
+                'js/dev/dollar-bill.css.js',
+                'js/dev/dollar-bill.element.js',
+                'js/dev/dollar-bill.events.js',
+                'js/dev/dollar-bill.manipulate.js',
+                'js/dev/dollar-bill.load.js',
+                'js/dev/dollar-bill.utils.js'
                 ],
                 dest: 'js/dollarbill.min.js'
             },
             dollarbillMovie: {
                 src: [
-                'js/debug/dollar-bill.js',
-                'js/debug/dollar-bill.localStorage.js',
-                'js/debug/dollar-bill.cssClass.js',
-                'js/debug/dollar-bill.visibility.js',
-                'js/debug/dollar-bill.utils.js',
-                'js/debug/dollar-bill.load.js',
-                'js/debug/dollar-bill.utils.js'
+                'js/dev/dollar-bill.js',
+                'js/dev/dollar-bill.localStorage.js',
+                'js/dev/dollar-bill.cssClass.js',
+                'js/dev/dollar-bill.visibility.js',
+                'js/dev/dollar-bill.utils.js',
+                'js/dev/dollar-bill.load.js',
+                'js/dev/dollar-bill.utils.js'
                 ],
                 dest: 'js/movie/dollarbill.min.js'
             }
