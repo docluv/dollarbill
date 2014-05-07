@@ -6,30 +6,34 @@ dollarbill.fn.css = function (propertyName, value) {
         return undefined;
     }
 
-    var elem = this[0],
-        i = 0,
+    var elem, i = 0,
         prop;
 
-    if (typeof propertyName === "string" && !value) {
-        //return CSS property
+    for (var j = 0; j < this.length; j++) {
 
-        return elem.style[propertyName];
-    }
+        elem = this[j];
 
-    if (typeof propertyName === "string" && value) {
-        //set CSS property
-        elem.style[propertyName] = value;
+        if (typeof propertyName === "string" && !value) {
+            //return CSS property
 
-        return this;
-    }
-
-    if (typeof propertyName === "object") {
-
-        for (prop in propertyName) {
-            elem.style[prop] = propertyName[prop];
+            return elem.style[propertyName];
         }
 
+        if (typeof propertyName === "string" && value) {
+            //set CSS property
+            elem.style[propertyName] = value;
+
+        }
+
+        if (typeof propertyName === "object") {
+
+            for (prop in propertyName) {
+                elem.style[prop] = propertyName[prop];
+            }
+
+        }
     }
+
 
     return this;
 };
@@ -132,7 +136,7 @@ dollarbill.fn.position = function () {
     if (!this[0]) {
         return;
     }
-    
+
     return this[0].getBoundingClientRect();
 
 };

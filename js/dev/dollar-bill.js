@@ -152,13 +152,7 @@
     		return ret;
         },
 
-        noop: function(){},
-
-        testExtend: function(){
-            
-            console.log(this.extend);
-
-        }
+        noop: function(){}
         
     };
 

@@ -1,5 +1,5 @@
 
-    dollarbill.fn.getVendorPropertyName = function (prop) {
+    dollarbill.getVendorPropertyName = function (prop) {
 
         var prefixes = ['Moz', 'Webkit', 'O', 'ms'],
                 vendorProp, i,
@@ -21,7 +21,7 @@
         }
     };
 
-    dollarbill.fn.hideURLBar = function (options) {
+    dollarbill.hideURLBar = function (options) {
 
         var win = window,
             doc = document,
@@ -47,14 +47,14 @@
 
     };
 
-    dollarbill.fn.transitionend = {
+    dollarbill.transitionend = {
         'animation': 'animationend',
         'webkitAnimation': 'webkitAnimationEnd',
         'MozAnimation': 'animationend',
         'OAnimation': 'oAnimationEnd'
     };
 
-    dollarbill.fn.checkTransform3dSupport = function () {
+    dollarbill.checkTransform3dSupport = function () {
 
         var div = document.createElement('div'),
             transform = this.getVendorPropertyName('transform');
@@ -66,7 +66,7 @@
 
     };
 
-    dollarbill.fn.buildVendorNames = function () {
+    dollarbill.buildVendorNames = function () {
 
         return {
             // Check for the browser's transitions support.
@@ -80,13 +80,13 @@
 
     };
 
-    dollarbill.fn.s4 = function () {
+    dollarbill.s4 = function () {
         return Math.floor((1 + Math.random()) * 0x10000)
                .toString(16)
                .substring(1);
     };
 
-    dollarbill.fn.guid = function () {
+    dollarbill.guid = function () {
         return this.s4() + this.s4() + '-' + this.s4() + '-' + this.s4() + '-' +
            this.s4() + '-' + this.s4() + this.s4() + this.s4();
     };

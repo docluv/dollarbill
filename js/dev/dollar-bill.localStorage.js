@@ -1,5 +1,5 @@
 
-    dollarbill.fn.parseLocalStorage = function (key) {
+    dollarbill.parseLocalStorage = function (key) {
 
         var value = localStorage.getItem(key);
 
