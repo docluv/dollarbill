@@ -107,7 +107,7 @@
                 if ((options = arguments[i]) !== null) {
                     // Extend the base object
                     for (name in options) {
-                        src = target[name];
+                      //  src = target[name];
                         copy = options[name];
 
                         // Prevent never-ending loop

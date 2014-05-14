@@ -1,8 +1,24 @@
 module.exports = function (grunt) {
 
+    // Force use of Unix newlines
+    grunt.util.linefeed = '\n';
+
+    RegExp.quote = function (string) {
+        return string.replace(/[-\\^$*+?.()|[\]{}]/g, '\\$&');
+    };
+
+    var fs = require('fs');
+    var path = require('path');
+
     // Project configuration.
     grunt.initConfig({
+        // Metadata.
         pkg: grunt.file.readJSON('package.json'),
+        banner: '/*!\n' +
+            ' * <%= pkg.name %> v<%= pkg.version %> (<%= pkg.homepage %>)\n' +
+            ' * Copyright 2013-<%= grunt.template.today("yyyy") %> <%= pkg.author %>\n' +
+            ' * Licensed under <%= pkg.license.type %> (<%= pkg.license.url %>)\n' +
+            ' */\n',
         qunit: {
             all: ['js/specs/**/*.html']
         },
@@ -22,6 +38,9 @@ module.exports = function (grunt) {
             //    },
 
             dollarbill: {
+                options: {
+                    banner: '<%= banner %>'
+                },
                 src: [
                 'js/dev/dollar-bill.js',
                 'js/dev/dollar-bill.localStorage.js',
@@ -35,7 +54,7 @@ module.exports = function (grunt) {
                 'js/dev/dollar-bill.load.js',
                 'js/dev/dollar-bill.utils.js'
                 ],
-                dest: 'js/dollarbill.min.js'
+                dest: 'js/<%= pkg.name %>.min.js'
             },
             dollarbillMovie: {
                 src: [
@@ -47,7 +66,7 @@ module.exports = function (grunt) {
                 'js/dev/dollar-bill.load.js',
                 'js/dev/dollar-bill.utils.js'
                 ],
-                dest: 'js/movie/dollarbill.min.js'
+                dest: 'js/movie/<%= pkg.name %>.min.js'
             }
 
 
@@ -55,8 +74,8 @@ module.exports = function (grunt) {
     });
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
- //   grunt.loadNpmTasks('grunt-contrib-jshint');
-  //  grunt.loadNpmTasks('grunt-contrib-qunit');
+    //   grunt.loadNpmTasks('grunt-contrib-jshint');
+    //  grunt.loadNpmTasks('grunt-contrib-qunit');
 
     // Default task.
     grunt.registerTask('default', [/*'jshint', */'uglify' /* "qunit" */]);

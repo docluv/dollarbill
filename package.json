@@ -1,5 +1,11 @@
 {
-  "name": "dollar-bill",
+  "name": "dollarbill",
+  "homepage": "https://github.com/docluv/dollarbill",
+  "author": "Chris Love",
+  "license": {
+    "type": "Apache",
+    "url": "https://github.com/docluv/dollarbill/LICENSE"
+  },
   "version": "0.0.1",
   "devDependencies": {
     "grunt": "~0.4.1",
