@@ -1,13 +1,11 @@
+dollarbill.parseLocalStorage = function(key) {
 
-    dollarbill.parseLocalStorage = function (key) {
+    var value = localStorage.getItem(key);
 
-        var value = localStorage.getItem(key);
+    if (!value) {
+        return {};
+    }
 
-        if (!value) {
-            return {};
-        }
+    return JSON.parse(value) || {};
 
-        return JSON.parse(value) || {};
-
-    };
-
+};

@@ -25,7 +25,7 @@ dollarbill.fn.append = function (content) {
     }
 
     if (!content.nodeType && typeof content === "string") {
-        content = document.createElement(content)
+        content = document.createElement(content);
     }
 
     for (var i = 0; i < len; i++) {

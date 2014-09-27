@@ -12,7 +12,7 @@ module("Dollar Bill Unit Tests", {
 
 
 
-test("Verify We Have dillar-bill with expected members", function () {
+test("Verify We Have dollar-bill with expected members", function () {
 
     //basic sainty assertions to know members are present
     isFunction(dollarbill, "dollarbill object should exist");

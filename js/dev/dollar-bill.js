@@ -4,161 +4,161 @@
 
 (function (window, undefined) {
 
-    "use strict";
+	"use strict";
 
-    var dollarbill = function (selector, context) {
+	var dbl = function (selector, context) {
 
-        var db =  new dollarbill.fn.init(selector, context),
-            nodes, i;
+		var db =  new dbl.fn.init(selector, context),
+			nodes, i;
 
-        // HANDLE: $(""), $(null), $(undefined), $(false)
+		// HANDLE: $(""), $(null), $(undefined), $(false)
 		if ( !selector ) {
 			
-            db.length = 0;
-            return db;
+			db.length = 0;
+			return db;
 
 		}
 
-        if ( typeof selector === "string" ) {
+		if ( typeof selector === "string" ) {
 
-            if(context && context.nodeType){
-                nodes = context.querySelectorAll(selector);    
-            }else{
-                nodes = document.querySelectorAll(selector);
-            }
+			if(context && context.nodeType){
+				nodes = context.querySelectorAll(selector);    
+			}else{
+				nodes = document.querySelectorAll(selector);
+			}
 
-            db.length = nodes.length;
-            db.selector = selector;
+			db.length = nodes.length;
+			db.selector = selector;
 
-            for(i = 0; i < nodes.length; i++){
-                db[i] = nodes[i];
-            }
+			for(i = 0; i < nodes.length; i++){
+				db[i] = nodes[i];
+			}
 
-        }else if ( selector.nodeType ) {
+		}else if ( selector.nodeType ) {
 
-            //if(!selector.length){
-            //    selector = [selector];
-            //}
+			//if(!selector.length){
+			//    selector = [selector];
+			//}
 
-            db[0] = selector;
-            db.length = (!selector.length) ? 1 : selector.length;
-        }
+			db[0] = selector;
+			db.length = (!selector.length) ? 1 : selector.length;
+		}
 
-        return db;
+		return db;
 
-    };
+	};
 
-    dollarbill.fn = dollarbill.prototype = {
+	dbl.fn = dbl.prototype = {
 
-        constructor: dollarbill,
+		constructor: dbl,
 
-        init: function () {
+		init: function () {
 
-            //this.length = 5;
-            //this.selector = ".test";
+			//this.length = 5;
+			//this.selector = ".test";
 
-            return this;            
-        },
+			return this;            
+		},
 
-        version: "0.0.2",
+		version: "0.0.5",
 
-        length: 0,
-        context: undefined,
-        selector: "",
-        rclass : /[\t\r\n]/g,
+		length: 0,
+		context: undefined,
+		selector: "",
+		rclass : /[\t\r\n]/g,
 
-        trim: function( text ) {
-	    	return text == null ? "" : text.trim( text );
-    	},
+		trim: function( text ) {
+			return text == null ? "" : text.trim( text );
+		},
 
-        isArray: function( obj ) {
-		    return Object.prototype.toString.call(obj) === "[object Array]";
-	    },
+		isArray: function( obj ) {
+			return Object.prototype.toString.call(obj) === "[object Array]";
+		},
 
-        merge: function(first, second){},
+		merge: function(first, second){},
 
-        each: function(obj, callback){
-            
-            if(callback === undefined){
-                callback = obj;
-                obj = this;
-            }
+		each: function(obj, callback){
+			
+			if(callback === undefined){
+				callback = obj;
+				obj = this;
+			}
 
-            if(!this.isArray(obj)){
-                return;
-            }
+			if(!this.isArray(obj)){
+				return;
+			}
 
-            var value,
-                i = 0,
-                length = obj.length;
+			var value,
+				i = 0,
+				length = obj.length;
 
-            for(; i < length; i++){
-                
-            }
+			for(; i < length; i++){
+				
+			}
 
-        },
+		},
 
-        map: function(elems, callback){
+		map: function(elems, callback){
 
-		    var value,
-			    i = 0,
-			    length = elems.length,
-			    isArray = this.isArray( elems ),
-			    ret = [];
+			var value,
+				i = 0,
+				length = elems.length,
+				isArray = this.isArray( elems ),
+				ret = [];
 
-		    // Go through the array, translating each of the items to their
-		    if ( isArray ) {
-			    for ( ; i < length; i++ ) {
-				    value = callback( elems[ i ], i, arg );
+			// Go through the array, translating each of the items to their
+			if ( isArray ) {
+				for ( ; i < length; i++ ) {
+					value = callback( elems[ i ], i, arg );
 
-				    if ( value != null ) {
-					    ret[ ret.length ] = value;
-				    }
-			    }
+					if ( value != null ) {
+						ret[ ret.length ] = value;
+					}
+				}
 
-		    // Go through every key on the object,
-		    } else {
-			    for ( i in elems ) {
-				    value = callback( elems[ i ], i, arg );
+			// Go through every key on the object,
+			} else {
+				for ( i in elems ) {
+					value = callback( elems[ i ], i, arg );
 
-				    if ( value != null ) {
-					    ret[ ret.length ] = value;
-				    }
-			    }
-		    }
+					if ( value != null ) {
+						ret[ ret.length ] = value;
+					}
+				}
+			}
 
-            return ret;
+			return ret;
 
-        },
+		},
 
-        grep: function(elems, callback, inv){
-            
-            var retVal,
-			    ret = [],
-			    i = 0,
-			    length = elems.length;
+		grep: function(elems, callback, inv){
+			
+			var retVal,
+				ret = [],
+				i = 0,
+				length = elems.length;
 
-		    inv = !!inv;
+			inv = !!inv;
 
-		    // Go through the array, only saving the items
-		    // that pass the validator function
-		    for ( ; i < length; i++ ) {
-			    retVal = !!callback( elems[ i ], i );
-			    if ( inv !== retVal ) {
-				    ret.push( elems[ i ] );
-			    }
-		    }
+			// Go through the array, only saving the items
+			// that pass the validator function
+			for ( ; i < length; i++ ) {
+				retVal = !!callback( elems[ i ], i );
+				if ( inv !== retVal ) {
+					ret.push( elems[ i ] );
+				}
+			}
 
-    		return ret;
-        },
+			return ret;
+		},
 
-        noop: function(){}
-        
-    };
+		noop: function(){}
+		
+	};
 
-    // Give the init function the dollarbill prototype for later instantiation
-    dollarbill.fn.init.prototype = dollarbill.fn;
+	// Give the init function the dbl prototype for later instantiation
+	dbl.fn.init.prototype = dbl.fn;
 
-    return (window.dollarbill = window.$ = dollarbill);
+	return (window.dollarbill = window.$ = dbl);
 
 }(window));

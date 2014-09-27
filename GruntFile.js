@@ -28,6 +28,29 @@ module.exports = function (grunt) {
             },
             files: ['Gruntfile.js', 'js/dev/*.js']
         },
+        bump: {
+            options: {
+              files: ['package.json'],
+              updateConfigs: [],
+              commit: true,
+              commitMessage: 'Release v%VERSION%',
+              commitFiles: ['package.json'],
+              createTag: true,
+              tagName: 'v%VERSION%',
+              tagMessage: 'Version %VERSION%',
+              push: true,
+              pushTo: 'upstream',
+              gitDescribeOptions: '--tags --always --abbrev=1 --dirty=-d'
+            }
+          },
+        version: {
+            myplugin: {
+                //options: {
+                //    prefix: 'version:\\s+'
+                //},
+                src: ['js/dev/dollar-bill.js', 'js/123.js']
+            }
+        },
         uglify: {
             options: {
                 compress: true
@@ -68,16 +91,17 @@ module.exports = function (grunt) {
                 ],
                 dest: 'js/movie/<%= pkg.name %>.min.js'
             }
-
-
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-version');
+    grunt.loadNpmTasks('grunt-bump');
+    //grunt.loadNpmTasks('grunt-release');
     //   grunt.loadNpmTasks('grunt-contrib-jshint');
     //  grunt.loadNpmTasks('grunt-contrib-qunit');
 
     // Default task.
-    grunt.registerTask('default', [/*'jshint', */'uglify' /* "qunit" */]);
+    grunt.registerTask('default', [/*'jshint', *//*'bump',*/ 'version', 'uglify'/*, 'release'*/ /* "qunit" */]);
 
 };
