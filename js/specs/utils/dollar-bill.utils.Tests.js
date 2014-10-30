@@ -2,13 +2,112 @@
 module("Dollar Bill Unit Tests", {
     setup: function () {
 
-        
+
 
     },
     teardown: function () {
 
     }
 });
+
+
+
+
+
+test("Verify dollarbill.extend extends two objects into expected object", function () {
+
+    var obj1 = {
+        foo: "bar"
+    },
+        obj2 = {
+            Austin: "Texas"
+        },
+        expect = {
+            foo: "bar",
+            Austin: "Texas"
+        },
+        result = $.extend(obj1, obj2);
+
+    ok(expect.foo, "should have foo property");
+    ok(expect.Austin, "should have Austin property");
+
+    equal(expect.foo, "bar", "foo should be 'bar'");
+    equal(expect.Austin, "Texas", "Austin should be 'Texas'");
+
+});
+
+
+
+
+test("Verify dollarbill.extend extends two objects into expected object", function () {
+
+    var obj1 = {
+            foo: {
+                Raleigh: "North Carolina"
+            }
+        },
+        obj2 = {
+            foo: {
+                Austin: "Texas"
+            }
+        },
+        expect = {
+            foo: {
+                Austin: "Texas",
+                Raleigh: "North Carolina"
+            }
+        },
+        result = $.extend(true, obj1, obj2);
+
+    ok(expect.foo, "should have foo property");
+    ok(expect.foo.Austin, "should have foo.Austin property");
+    ok(expect.foo.Raleigh, "should have foo.Austin property");
+
+    isObject(expect.foo, "foo should be an object");
+    equal(expect.foo.Austin, "Texas", "Austin should be 'Texas'");
+    equal(expect.foo.Raleigh, "North Carolina", "Raleigh should be 'North Carolina'");
+
+});
+
+test("Verify dollarbill.extend extends two objects into expected object", function () {
+
+    var obj1 = {
+        foo: {
+            Raleigh: "North Carolina"
+        }
+    },
+        obj2 = {
+            foo: {
+                Austin: "Texas"
+            }
+        },
+        obj3 = {
+            foo: {
+                Columbia: "Missouri"
+            }
+        },
+        expect = {
+            foo: {
+                Austin: "Texas",
+                Raleigh: "North Carolina",
+                Columbia: "Missouri"
+            }
+        },
+        result = $.extend(true, obj1, obj2);
+
+    ok(expect.foo, "should have foo property");
+    ok(expect.foo.Austin, "should have foo.Austin property");
+    ok(expect.foo.Raleigh, "should have foo.Austin property");
+    ok(expect.foo.Columbia, "should have foo.Columbia property");
+
+    isObject(expect.foo, "foo should be an object");
+    equal(expect.foo.Austin, "Texas", "Austin should be 'Texas'");
+    equal(expect.foo.Raleigh, "North Carolina", "Raleigh should be 'North Carolina'");
+    equal(expect.foo.Columbia, "Missouri", "Austin should be 'Missouri'");
+
+});
+
+
 
 
 
@@ -99,5 +198,9 @@ test("Verify can a dollarbill.isArray won't identify an object as an array", fun
     equal(result, expect, "trim should be false");
 
 });
+
+
+
+
 
 

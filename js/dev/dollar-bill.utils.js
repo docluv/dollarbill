@@ -136,18 +136,18 @@
                     }
 
                     // Recurse if we're merging plain objects or arrays
-                    if (deep && copy && (typeof copy === "object" ||
-                            (copyIsArray = copy.isArray))) {
+                    if (deep && copy && (dollarbill.isPlainObject(copy) ||
+                                (copyIsArray = dollarbill.isArray(copy)))) {
                         if (copyIsArray) {
                             copyIsArray = false;
-                            clone = src && src.isArray ? src : [];
+                            clone = src && dollarbill.isArray(src) ? src : [];
 
                         } else {
-                            clone = src && typeof src === "object" ? src : {};
+                            clone = src && dollarbill.isPlainObject(src) ? src : {};
                         }
 
                         // Never move original objects, clone them
-                        target[name] = this.extend(deep, clone, copy);
+                        target[name] = dollarbill.extend(deep, clone, copy);
 
                         // Don't bring in undefined values
                     } else if (copy !== undefined) {
