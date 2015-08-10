@@ -56,7 +56,7 @@ dollarbill.fn.data = function (name, val) {
 
     //TODO: modify this to allow an object of name - values to be passed & set
 
-    var elem = this[i];
+    var elem = this[0];
 
     if (!val) {
 

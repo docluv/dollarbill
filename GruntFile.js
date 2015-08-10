@@ -10,6 +10,8 @@ module.exports = function (grunt) {
     var fs = require('fs');
     var path = require('path');
 
+    require("matchdep").filterDev("grunt-*").forEach(grunt.loadNpmTasks);
+
     // Project configuration.
     grunt.initConfig({
         // Metadata.
@@ -27,6 +29,18 @@ module.exports = function (grunt) {
                 browser: true
             },
             files: ['Gruntfile.js', 'js/dev/*.js']
+        },
+        yuidoc: {
+        	compile: {
+        		name: '<%= pkg.name %>',
+        		description: '<%= pkg.description %>',
+        		version: '<%= pkg.version %>',
+        		url: '<%= pkg.homepage %>',
+        		options: {
+        			paths: 'js/dev',
+        			outdir: 'docs/yui'
+        		}
+        	}
         },
         bump: {
             options: {
@@ -53,7 +67,7 @@ module.exports = function (grunt) {
         },
         uglify: {
             options: {
-                compress: true
+                compress: {}
             },
             //    options: {
             //        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
@@ -91,17 +105,40 @@ module.exports = function (grunt) {
                 ],
                 dest: 'js/movie/<%= pkg.name %>.min.js'
             }
+        },
+        concat: {
+            options: {
+                compress: false
+            },
+            //    options: {
+            //        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+            //'<%= grunt.template.today("yyyy-mm-dd") %> */'
+            //    },
+
+            dollarbill: {
+                options: {
+                    banner: '<%= banner %>'
+                },
+                src: [
+                'js/dev/dollar-bill.js',
+                'js/dev/dollar-bill.localStorage.js',
+                'js/dev/dollar-bill.cssClass.js',
+                'js/dev/dollar-bill.visibility.js',
+                'js/dev/dollar-bill.utils.js',
+                'js/dev/dollar-bill.css.js',
+                'js/dev/dollar-bill.element.js',
+                'js/dev/dollar-bill.events.js',
+                'js/dev/dollar-bill.manipulate.js',
+                'js/dev/dollar-bill.load.js',
+                'js/dev/dollar-bill.utils.js'
+                ],
+                dest: 'js/<%= pkg.name %>.js'
+            }
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-version');
-    grunt.loadNpmTasks('grunt-bump');
-    //grunt.loadNpmTasks('grunt-release');
-    //   grunt.loadNpmTasks('grunt-contrib-jshint');
-    //  grunt.loadNpmTasks('grunt-contrib-qunit');
-
+   
     // Default task.
-    grunt.registerTask('default', [/*'jshint', *//*'bump',*/ 'version', 'uglify'/*, 'release'*/ /* "qunit" */]);
+    grunt.registerTask('default', [/*'jshint', *//*'bump',*'version',*/ 'uglify', /*"yuidoc"/*, 'release'*/ /* "qunit" */]);
 
 };

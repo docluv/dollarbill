@@ -1,19 +1,22 @@
 {
-  "name": "dollarbill",
-  "homepage": "https://github.com/docluv/dollarbill",
-  "author": "Chris Love",
-  "license": {
-    "type": "Apache",
-    "url": "https://github.com/docluv/dollarbill/LICENSE"
-  },
-  "version": "0.0.5",
-  "devDependencies": {
-    "grunt": "0.4.5",
-    "grunt-contrib-jshint": "~0.6.x",
-    "grunt-contrib-uglify": "~0.4.x",
-    "grunt-contrib-qunit": "~0.3.x",
-    "grunt-version": "~0.3.x",
-    "grunt-release": "~0.7.x",
-    "grunt-bump": "~0.0.x"
-  }
+	"name": "dollarbill",
+	"homepage": "https://github.com/docluv/dollarbill",
+	"author": "Chris Love",
+	"license": {
+		"type": "Apache",
+		"url": "https://github.com/docluv/dollarbill/LICENSE"
+	},
+	"version": "0.0.5",
+	"devDependencies": {
+		"grunt": "0.4.5",
+		"grunt-contrib-jshint": "~0.6.x",
+		"grunt-contrib-uglify": "~0.4.x",
+		"grunt-contrib-qunit": "~0.3.x",
+		"grunt-contrib-concat": "~0.5.0",
+		"grunt-contrib-yuidoc": "~0.7.0",
+		"grunt-version": "~0.3.x",
+		"grunt-release": "~0.7.x",
+		"grunt-bump": "~0.0.x",
+		"matchdep": "*"
+	}
 }
