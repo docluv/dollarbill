@@ -1,2 +1,27 @@
 
 /node_modules
+/docs/yui/api.js
+/docs/yui/assets/css/external-small.png
+/docs/yui/assets/css/logo.png
+/docs/yui/assets/css/main.css
+/docs/yui/assets/favicon.ico
+/docs/yui/assets/img/spinner.gif
+/docs/yui/assets/index.html
+/docs/yui/assets/js/api-filter.js
+/docs/yui/assets/js/api-list.js
+/docs/yui/assets/js/api-search.js
+/docs/yui/assets/js/apidocs.js
+/docs/yui/assets/js/yui-prettify.js
+/docs/yui/assets/vendor/prettify/CHANGES.html
+/docs/yui/assets/vendor/prettify/COPYING
+/docs/yui/assets/vendor/prettify/README.html
+/docs/yui/assets/vendor/prettify/prettify-min.css
+/docs/yui/assets/vendor/prettify/prettify-min.js
+/docs/yui/classes/index.html
+/docs/yui/data.json
+/docs/yui/files/index.html
+/docs/yui/files/js_dev_dollar-bill.js.html
+/docs/yui/index.html
+/docs/yui/modules/dollarbill.html
+/docs/yui/modules/index.html
+/vwd.webinfo

@@ -282,13 +282,51 @@ dollarbill.fn.text = function (textString) {
     return "";
 };
 
-dollarbill.fn.parent = function (c) {
+dollarbill.fn.parent = function (selector) {
 
-    if (!c.length) {
-        c = [c];
-    }
+        var ret = [],
+            curr, match, parents, i;; 
+ 
+ 		this.each(function(){ 
 
-    return c[0].parentNode;
+ 			curr = this;
+             
+             if(selector){
+                 
+                parents = document.querySelectorAll( selector ); 
+
+             }
+  
+ 			while( curr.parentElement && !match ){ 
+ 
+ 				curr = curr.parentElement; 
+ 
+ 				if( selector ){ 
+ 
+                    for(i = 0; i < parents.length; i++){
+                        
+                        if( curr === parents[i] ){ 
+                            match = true; 
+    
+                            if (!ret.indexOf(curr) === -1) {
+                                ret.push(curr);
+                            }
+    
+                        } 
+                       
+                    }
+  
+ 				} else { 
+ 
+ 					if( !ret.indexOf(curr) === -1 ){ 
+ 						ret.push( curr ); 
+ 					} 
+ 
+ 				} 
+ 			} 
+ 		}); 
+ 
+ 		return dollarbill(ret); 
 
 };
 
