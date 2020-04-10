@@ -1,27 +1,29 @@
+dollarbill.fn.defaultShow = "block";
+
 //no need to support time, easing etc as those should be done with CSS not JavaScript
 //callback is also sort of moot since this is instantaneous.
-dollarbill.fn.show = function (style) {
-    style = style || "block";
+dollarbill.fn.show = function ( style ) {
+    style = style || this.defaultShow;
 
-    for (var i = 0; i < this.length; i++) {
-        this[i].style.display = style;
+    for ( var i = 0; i < this.length; i++ ) {
+        this[ i ].style.display = style;
     }
 };
 
 dollarbill.fn.hide = function () {
-    for (var i = 0; i < this.length; i++) {
-        this[i].style.display = "none";
+    for ( var i = 0; i < this.length; i++ ) {
+        this[ i ].style.display = "none";
     }
 };
 
-dollarbill.fn.toggle = function (style) {
+dollarbill.fn.toggle = function ( style ) {
 
-    style = style || "block";
+    style = style || this.defaultShow;
 
-    for (var i = 0; i < this.length; i++) {
-        var ele = this[i];
+    for ( var i = 0; i < this.length; i++ ) {
+        var ele = this[ i ];
 
-        if (ele.style.display === "" || ele.style.display === "none") {
+        if ( ele.style.display === "" || ele.style.display === "none" ) {
             ele.style.display = style;
         } else {
             ele.style.display = "none";
@@ -32,4 +34,3 @@ dollarbill.fn.toggle = function (style) {
 };
 
 //fade methods should be handled by CSS instead of JavaScript
-

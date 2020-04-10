@@ -2,109 +2,107 @@
 //utility methods based on jQuery's example.
 ;
 
-(function (window, undefined) {
+( function ( window, undefined ) {
 
-	"use strict";
+    "use strict";
 
-	var dbl = function (selector, context) {
+    var dbl = function ( selector, context ) {
 
-		var db =  new dbl.fn.init(selector, context),
-			nodes, i;
+        var db = new dbl.fn.init( selector, context ),
+            nodes, i;
 
-		// HANDLE: $(""), $(null), $(undefined), $(false)
-		if ( !selector ) {
-			
-			db.length = 0;
-			return db;
+        // HANDLE: $(""), $(null), $(undefined), $(false)
+        if ( !selector ) {
 
-		}
+            db.length = 0;
+            return db;
 
-		if ( typeof selector === "string" ) {
+        }
 
-			if(context && context.nodeType){
-				nodes = context.querySelectorAll(selector);    
-			}else{
-				nodes = document.querySelectorAll(selector);
-			}
+        if ( typeof selector === "string" ) {
 
-			db.length = nodes.length;
-			db.selector = selector;
+            if ( context && context.nodeType ) {
+                nodes = context.querySelectorAll( selector );
+            } else {
+                nodes = document.querySelectorAll( selector );
+            }
 
-			for(i = 0; i < nodes.length; i++){
-				db[i] = nodes[i];
-			}
+            db.length = nodes.length;
+            db.selector = selector;
 
-		}else if ( selector.nodeType ) {
+            for ( i = 0; i < nodes.length; i++ ) {
+                db[ i ] = nodes[ i ];
+            }
 
-			//if(!selector.length){
-			//    selector = [selector];
-			//}
+        } else if ( selector.nodeType ) {
 
-			db[0] = selector;
-			db.length = (!selector.length) ? 1 : selector.length;
-		}
+            //if(!selector.length){
+            //    selector = [selector];
+            //}
 
-		return db;
+            db[ 0 ] = selector;
+            db.length = ( !selector.length ) ? 1 : selector.length;
+        }
 
-	};
+        return db;
 
-	dbl.fn = dbl.prototype = {
+    };
 
-		constructor: dbl,
+    dbl.fn = dbl.prototype = {
 
-		init: function () {
+        constructor: dbl,
 
-			//this.length = 5;
-			//this.selector = ".test";
+        init: function () {
 
-			return this;            
-		},
+            //this.length = 5;
+            //this.selector = ".test";
 
-		version: "0.0.5",
+            return this;
+        },
 
-		length: 0,
-		context: undefined,
-		selector: "",
-		rclass : /[\t\r\n]/g
+        version: "0.0.5",
 
+        length: 0,
+        context: undefined,
+        selector: "",
+        rclass: /[\t\r\n]/g
 
-		
-	};
+    };
 
-	dbl.trim = function( text ) {
+    dbl.trim = function ( text ) {
         return text == null ? "" : text.trim( text );
-    }
+    };
 
-    dbl.isArray =  function( obj ) {
-        return Object.prototype.toString.call(obj) === "[object Array]";
-    }
+    dbl.isArray = function ( obj ) {
+        return Object.prototype.toString.call( obj ) === "[object Array]";
+    };
 
-    dbl.isPlainObject = function( obj ) {
+    dbl.isPlainObject = function ( obj ) {
 
-        if (typeof obj !== "object" || obj.nodeType || obj === obj.window) {
+        if ( typeof obj !== "object" || obj.nodeType || obj === obj.window ) {
             return false;
         }
 
         if ( obj.constructor &&
-				!Object.prototype.hasOwnProperty.call(obj.constructor.prototype, "isPrototypeOf")) {
+            !Object.prototype.hasOwnProperty.call( obj.constructor.prototype, "isPrototypeOf" ) ) {
             return false;
         }
 
         // If the function hasn't returned already, we're confident that
         // |obj| is a plain object, created by {} or constructed with new Object
         return true;
-    }
+    };
 
-    dbl.merge = function(first, second){}
+    dbl.merge = function ( first, second ) {};
 
-    dbl.each = function(obj, callback){
-			
-        if(callback === undefined){
+    dbl.each = function ( obj, callback ) {
+
+        if ( callback === undefined ) {
             callback = obj;
             obj = this;
         }
 
-        if(!this.isArray(obj)){
+        if ( !this.isArray( obj ) ) {
             return;
         }
 
@@ -112,13 +110,13 @@
             i = 0,
             length = obj.length;
 
-        for(; i < length; i++){
-				
+        for ( ; i < length; i++ ) {
+
         }
 
-    }
+    };
 
-    dbl.map = function(elems, callback){
+    dbl.map = function ( elems, callback ) {
 
         var value,
             i = 0,
@@ -151,8 +149,8 @@
 
     }
 
-    dbl.grep = function(elems, callback, inv){
-			
+    dbl.grep = function ( elems, callback, inv ) {
+
         var retVal,
             ret = [],
             i = 0,
@@ -172,11 +170,11 @@
         return ret;
     }
 
-    dbl.noop = function(){}
+    dbl.noop = function () {}
 
-	// Give the init function the dbl prototype for later instantiation
-	dbl.fn.init.prototype = dbl.fn;
+    // Give the init function the dbl prototype for later instantiation
+    dbl.fn.init.prototype = dbl.fn;
 
-	return (window.dollarbill = window.$ = dbl);
+    return ( window.dollarbill = window.$ = dbl );
 
-}(window));
+}( window ) );
