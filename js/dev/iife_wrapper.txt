@@ -1,0 +1,11 @@
+//dollar bill is a simple, custom helper library with a collection of
+//utility methods based on jQuery's example.
+;
+
+( function ( window, undefined ) {
+
+    "use strict";
+
+{{{code}}}
+
+}( window ) );

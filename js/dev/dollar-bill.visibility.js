@@ -1,4 +1,4 @@
-dollarbill.fn.defaultShow = "block";
+dollarbill.fn.defaultShow = "flex";
 
 //no need to support time, easing etc as those should be done with CSS not JavaScript
 //callback is also sort of moot since this is instantaneous.
