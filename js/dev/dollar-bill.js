@@ -66,4 +66,4 @@ dbl.noop = function () {};
 // Give the init function the dbl prototype for later instantiation
 dbl.fn.init.prototype = dbl.fn;
 
-return ( window.dollarbill = window.$ = dbl );
+window.dollarbill = window.$ = dbl;
