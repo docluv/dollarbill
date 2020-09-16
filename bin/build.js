@@ -21,6 +21,7 @@ let destPath = "../js/",
 
 let wrapper = utils.readFile( srcPath + "iife_wrapper.txt" ),
     core = utils.readFile( srcPath + "dollar-bill.js" ),
+    //use args for included modules
     css = utils.readFile( srcPath + "dollar-bill.cssClass.js" ),
     element = utils.readFile( srcPath + "dollar-bill.element.js" ),
     events = utils.readFile( srcPath + "dollar-bill.events.js" );

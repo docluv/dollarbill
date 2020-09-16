@@ -27,11 +27,7 @@ dollarbill.fn.append = function ( content ) {
         content = document.createElement( content );
     }
 
-    for ( var i = 0; i < len; i++ ) {
-
-        this[ i ].appendChild( content );
-
-    }
+    this[ 0 ].appendChild( content );
 
     return this;
 

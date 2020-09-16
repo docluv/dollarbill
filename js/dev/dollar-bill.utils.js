@@ -116,7 +116,7 @@ dbl.isPlainObject = function ( obj ) {
 
 
 //Object.assign
-
+//deep copy
 // dollarbill.extend = function () {
 
 //     var options, name, src, copy, copyIsArray, clone,

@@ -1,18 +1,20 @@
-dollarbill.fn.loadScript = function (id, url, callback) {
+//dynamically load a script file
 
-    if (!document.getElementById(id)) {
+dollarbill.fn.loadScript = function ( id, url, callback ) {
 
-        var script = document.createElement("script");
+    if ( !document.getElementById( id ) ) {
+
+        var script = document.createElement( "script" );
 
         script.type = "text/javascript";
         script.id = id;
 
-        if (script.readyState) {  //IE
+        if ( script.readyState ) { //IE
 
             script.onreadystatechange = function () {
 
-                if (script.readyState === "loaded" ||
-                        script.readyState === "complete") {
+                if ( script.readyState === "loaded" ||
+                    script.readyState === "complete" ) {
 
                     script.onreadystatechange = null;
                     callback();
@@ -21,14 +23,14 @@ dollarbill.fn.loadScript = function (id, url, callback) {
 
             };
 
-        } else {  //Others
+        } else { //Others
             script.onload = function () {
                 callback();
             };
         }
 
         script.src = url;
-        document.body.appendChild(script);
+        document.body.appendChild( script );
 
     } else {
         callback();
