@@ -1,18 +1,34 @@
-dollarbill.fn.attr = function ( name, value ) {
+dollarbill.fn.type = function (value) {
 
-    if ( !name ) {
-        return this;
+    if (value !== undefined) {
+        for (var i = 0; i < this.length; i++) {
+            this[i].type = value;
+        }
+    } else {
+        if (this[0]) {
+            return this[0].type;
+        }
     }
 
-    if ( !value ) {
-        return this[ 0 ].getAttribute( name );
-    }
+};
 
-    for ( var i = 0; i < this.length; i++ ) {
-        this[ i ].setAttribute( name, value );
-    }
+dollarbill.fn.attr = function (name, value) {
 
-    return this;
+    if (value) {
+
+        for (var i = 0; i < this.length; i++) {
+            this[i].setAttribute(name, value);
+        }
+
+    } else {
+
+        if (this[0]) {
+
+            return this[0].getAttribute(name);
+
+        }
+
+    }
 
 };
 
