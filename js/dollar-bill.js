@@ -2,310 +2,368 @@
 //utility methods based on jQuery's example.
 ;
 
-( function ( window, undefined ) {
+(function (window, undefined) {
 
     "use strict";
 
-var dbl = function ( selector, context ) {
+    var dbl = function (selector, context) {
 
-    var db = new dbl.fn.init( selector, context ),
-        nodes, i;
+        var db = new dbl.fn.init(selector, context),
+            nodes, i;
 
-    // HANDLE: $(""), $(null), $(undefined), $(false)
-    if ( !selector ) {
+        // HANDLE: $(""), $(null), $(undefined), $(false)
+        if (!selector) {
 
-        db.length = 0;
+            db.length = 0;
+            return db;
+
+        }
+
+        if (typeof selector === "string") {
+
+            if (context && context.nodeType) {
+                nodes = context.querySelectorAll(selector);
+            } else {
+                nodes = document.querySelectorAll(selector);
+            }
+
+            db.length = nodes.length;
+            db.selector = selector;
+
+            for (i = 0; i < nodes.length; i++) {
+                db[i] = nodes[i];
+            }
+
+        } else if (selector.nodeType) {
+
+            //if(!selector.length){
+            //    selector = [selector];
+            //}
+
+            db[0] = selector;
+            db.length = (!selector.length) ? 1 : selector.length;
+        }
+
         return db;
 
-    }
-
-    if ( typeof selector === "string" ) {
-
-        if ( context && context.nodeType ) {
-            nodes = context.querySelectorAll( selector );
-        } else {
-            nodes = document.querySelectorAll( selector );
-        }
-
-        db.length = nodes.length;
-        db.selector = selector;
-
-        for ( i = 0; i < nodes.length; i++ ) {
-            db[ i ] = nodes[ i ];
-        }
-
-    } else if ( selector.nodeType ) {
-
-        //if(!selector.length){
-        //    selector = [selector];
-        //}
-
-        db[ 0 ] = selector;
-        db.length = ( !selector.length ) ? 1 : selector.length;
-    }
-
-    return db;
-
-};
-
-dbl.fn = dbl.prototype = {
-
-    constructor: dbl,
-
-    init: function () {
-
-        //this.length = 5;
-        //this.selector = ".test";
-
-        return this;
-    },
-
-    version: "0.0.6",
-
-    length: 0,
-    context: undefined,
-    selector: "",
-    rclass: /[\t\r\n]/g
-
-};
-
-dbl.noop = function () {};
-
-// Give the init function the dbl prototype for later instantiation
-dbl.fn.init.prototype = dbl.fn;
-
-window.dollarbill = window.$ = dbl;
-
-dollarbill.fn.removeClass = function (cssClass) {
-
-    if (!cssClass || typeof cssClass !== "string") {
-        return;
-    }
-
-    for (var i = 0; i < this.length; i++) {
-
-        var classes = cssClass.split(" ");
-
-        for (var j = 0; j < classes.length; j++) {
-            if (classes[j] !== "") {
-                this[i].classList.remove(classes[j]);
-            }
-        }
-
-    }
-
-    return this;
-
-};
-
-dollarbill.fn.addClass = function (cssClass) {
-
-    if (!cssClass || typeof cssClass !== "string") {
-        return;
-    }
-
-    for (var i = 0; i < this.length; i++) {
-        var classes = cssClass.split(" ");
-
-        for (var j = 0; j < classes.length; j++) {
-            if (classes[j] !== "") {
-                this[i].classList.add(classes[j]);
-            }
-        }
-    }
-
-    return this;
-
-};
-
-dollarbill.fn.hasClass = function (cssClass) {
-
-    if (!cssClass || typeof cssClass !== "string") {
-        return this;
-    }
-
-    return this[0].classList.contains(cssClass);
-
-};
-
-dollarbill.fn.toggleClass = function (cssClass) {
-
-    if (!cssClass || typeof cssClass !== "string") {
-        return;
-    }
-
-    for (var i = 0; i < this.length; i++) {
-
-        this[i].classList.toggle(cssClass);
-    }
-
-    return this;
-
-};
-
-//https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent
-if ( !window.CustomEvent ) {
-
-    function CustomEvent( event, params ) {
-        params = params || {
-            bubbles: false,
-            cancelable: false,
-            detail: undefined
-        };
-        var evt = document.createEvent( 'CustomEvent' );
-        evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
-        return evt;
     };
 
-    CustomEvent.prototype = window.CustomEvent.prototype;
+    dbl.fn = dbl.prototype = {
 
-    window.CustomEvent = CustomEvent;
+        constructor: dbl,
 
-}
+        init: function () {
 
+            //this.length = 5;
+            //this.selector = ".test";
 
-dollarbill.fn.on = function ( evt, fn, bubble ) {
+            return this;
+        },
 
-    bubble = ( bubble === true ) ? true : false;
+        version: "0.0.6",
 
-    for ( var i = 0; i < this.length; i++ ) {
-        this[ i ].addEventListener( evt, fn, bubble );
-    }
+        length: 0,
+        context: undefined,
+        selector: "",
+        rclass: /[\t\r\n]/g
 
-};
+    };
 
-dollarbill.fn.off = function ( evt, fn, bubble ) {
+    dbl.noop = function () {};
 
-    for ( var i = 0; i < this.length; i++ ) {
-        this[ i ].removeEventListener( evt, fn, bubble );
-    }
+    // Give the init function the dbl prototype for later instantiation
+    dbl.fn.init.prototype = dbl.fn;
 
-};
+    window.dollarbill = window.$ = dbl;
 
-dollarbill.fn.trigger = function ( eventType, extraParameters ) {
+    dollarbill.fn.removeClass = function (cssClass) {
 
-    if ( !eventType ) {
+        if (!cssClass || typeof cssClass !== "string") {
+            return;
+        }
+
+        for (var i = 0; i < this.length; i++) {
+
+            var classes = cssClass.split(" ");
+
+            for (var j = 0; j < classes.length; j++) {
+                if (classes[j] !== "") {
+                    this[i].classList.remove(classes[j]);
+                }
+            }
+
+        }
+
         return this;
-    }
 
-    var i = 0,
-        event = new CustomEvent( eventType, extraParameters );
+    };
 
-    for ( ; i < this.length; i++ ) {
-        elem.dispatchEvent( event );
-    }
+    dollarbill.fn.addClass = function (cssClass) {
 
-};
-dollarbill.fn.attr = function ( name, value ) {
+        if (!cssClass || typeof cssClass !== "string") {
+            return;
+        }
 
-    if ( !name ) {
+        for (var i = 0; i < this.length; i++) {
+            var classes = cssClass.split(" ");
+
+            for (var j = 0; j < classes.length; j++) {
+                if (classes[j] !== "") {
+                    this[i].classList.add(classes[j]);
+                }
+            }
+        }
+
         return this;
-    }
 
-    if ( !value ) {
-        return this[ 0 ].getAttribute( name );
-    }
+    };
 
-    for ( var i = 0; i < this.length; i++ ) {
-        this[ i ].setAttribute( name, value );
-    }
+    dollarbill.fn.hasClass = function (cssClass) {
 
-    return this;
+        if (!cssClass || typeof cssClass !== "string") {
+            return this;
+        }
 
-};
+        return this[0].classList.contains(cssClass);
 
-dollarbill.fn.html = function ( value ) {
+    };
 
-    if ( !this[ 0 ] ) {
+    dollarbill.fn.toggleClass = function (cssClass) {
+
+        if (!cssClass || typeof cssClass !== "string") {
+            return;
+        }
+
+        for (var i = 0; i < this.length; i++) {
+
+            this[i].classList.toggle(cssClass);
+        }
+
         return this;
+
+    };
+
+
+    //https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent
+    if (!window.CustomEvent) {
+
+        function CustomEvent(event, params) {
+            params = params || {
+                bubbles: false,
+                cancelable: false,
+                detail: undefined
+            };
+            var evt = document.createEvent('CustomEvent');
+            evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+            return evt;
+        };
+
+        CustomEvent.prototype = window.CustomEvent.prototype;
+
+        window.CustomEvent = CustomEvent;
+
     }
 
-    var i = 0;
+    dollarbill.fn.on = function (evt, fn, bubble) {
 
-    if ( value === undefined ) {
-        return this[ 0 ].innerHTML;
-    }
+        bubble = (bubble === true) ? true : false;
 
-    for ( ; i < this.length; i++ ) {
-        this[ i ].innerHTML = value;
-    }
+        if (!Array.isArray(evt)) {
+            evt = [evt];
+        }
 
-    return this;
+        for (var i = 0; i < this.length; i++) {
 
-};
+            for (var j = 0; j < evt.length; j++) {
 
-dollarbill.fn.text = function ( value ) {
+                this[i].addEventListener(evt[j], fn, bubble);
 
-    if ( !this[ 0 ] ) {
+            }
+
+        }
+
         return this;
-    }
 
-    var i = 0;
+    };
 
-    if ( value === undefined ) {
-        return this[ 0 ].innerText;
-    }
+    dollarbill.fn.off = function (evt, fn, bubble) {
 
-    for ( ; i < this.length; i++ ) {
-        this[ i ].innerText = value;
-    }
+        for (var i = 0; i < this.length; i++) {
+            this[i].removeEventListener(evt, fn, bubble);
+        }
 
-    return this;
-
-};
-
-dollarbill.fn.value = function ( value ) {
-
-    if ( !this[ 0 ] ) {
         return this;
-    }
 
-    var i = 0;
+    };
 
-    if ( value === undefined ) {
-        return this[ 0 ].value;
-    }
+    dollarbill.fn.trigger = function (eventType, extraParameters) {
 
-    for ( ; i < this.length; i++ ) {
-        this[ i ].value = value;
-    }
+        if (!eventType) {
+            return this;
+        }
 
-    return this;
+        var i = 0,
+            event = new CustomEvent(eventType, extraParameters);
 
-};
+        for (; i < this.length; i++) {
+            elem.dispatchEvent(event);
+        }
 
-dollarbill.fn.removeAttr = function ( name ) {
-
-    if ( !this[ 0 ] ) {
         return this;
-    }
+    };
 
-    var i = 0;
+    dollarbill.fn.value = function (value) {
 
-    for ( ; i < this.length; i++ ) {
-        this[ i ].removeAttribute( name );
-    }
+        if (value) {
+            for (var i = 0; i < this.length; i++) {
+                this[i].value = value;
+            }
+        } else {
+            if (this[0]) {
 
-    return this;
-};
+                return this[0].value;
 
-dollarbill.fn.data = function ( name, val ) {
+            }
+        }
 
-    //TODO: modify this to allow an object of name - values to be passed & set
+    };
 
-    var elem = this[ i ];
+    dollarbill.fn.isValid = function () {
+        return this[0].validity.valid;
+    };
 
-    if ( !val ) {
+    dollarbill.fn.toggleDisabled = function (state) {
 
-        return ( elem.hasAttribute( "data-" + name ) ?
-            elem.getAttribute( "data-" + name ) : "" );
+        for (var i = 0; i < this.length; i++) {
+            this[i].disabled = state;
+            this[i].setAttribute("aria-disabled", state);
+        }
 
-    } else {
-        elem.setAttribute( "data-" + name, val );
-        return;
-    }
+        return this;
 
-};
+    };
 
+    dollarbill.fn.toggleFlex = function (state) {
 
-}( window ) );
+        for (var i = 0; i < this.length; i++) {
+
+            if (!state) //display
+            {
+
+                this[i].classList.add("d-none");
+                this[i].classList.remove("d-flex");
+
+            } else {
+
+                this[i].classList.remove("d-none");
+                this[i].classList.add("d-flex");
+
+            }
+
+        }
+
+        return this;
+
+    };
+
+    dollarbill.fn.html = function (value) {
+
+        if (value !== undefined) {
+            for (var i = 0; i < this.length; i++) {
+                this[i].innerHTML = value;
+            }
+        } else {
+            return this[0].innerHTML;
+        }
+
+    };
+
+    dollarbill.fn.text = function (value) {
+
+        if (value) {
+            for (var i = 0; i < this.length; i++) {
+                this[i].innerText = value;
+            }
+        } else {
+            return this[0].innerText;
+        }
+
+    };
+
+    dollarbill.fn.value = function (value) {
+
+        if (value) {
+            for (var i = 0; i < this.length; i++) {
+                this[i].value = value;
+            }
+        } else {
+            if (this[0]) {
+                return this[0].value;
+            }
+        }
+
+    };
+
+    dollarbill.fn.checked = function (value) {
+
+        if (value !== undefined) {
+            for (var i = 0; i < this.length; i++) {
+                this[i].checked = value;
+            }
+        } else {
+            return this[0].checked;
+        }
+
+    };
+
+    dollarbill.fn.append = function (content) {
+
+        if (!content) {
+            return this;
+        }
+
+        if (!content.nodeType && typeof content === "string") {
+            content = document.createElement(content);
+        }
+
+        this[0].appendChild(content);
+
+        return this;
+
+    };
+
+    dollarbill.fn.type = function (value) {
+
+        if (value !== undefined) {
+            for (var i = 0; i < this.length; i++) {
+                this[i].type = value;
+            }
+        } else {
+            if (this[0]) {
+                return this[0].type;
+            }
+        }
+
+    };
+
+    dollarbill.fn.attr = function (name, value) {
+
+        if (value) {
+
+            for (var i = 0; i < this.length; i++) {
+                this[i].setAttribute(name, value);
+            }
+
+        } else {
+
+            if (this[0]) {
+
+                return this[0].getAttribute(name);
+
+            }
+
+        }
+
+    };
+
+}(window));
