@@ -6,9 +6,9 @@
 
     "use strict";
 
-    var dbl = function (selector, context) {
+    let dbl = function (selector, context) {
 
-        var db = new dbl.fn.init(selector, context),
+        let db = new dbl.fn.init(selector, context),
             nodes, i;
 
         // HANDLE: $(""), $(null), $(undefined), $(false)
@@ -82,11 +82,11 @@
             return;
         }
 
-        for (var i = 0; i < this.length; i++) {
+        for (let i = 0; i < this.length; i++) {
 
-            var classes = cssClass.split(" ");
+            let classes = cssClass.split(" ");
 
-            for (var j = 0; j < classes.length; j++) {
+            for (let j = 0; j < classes.length; j++) {
                 if (classes[j] !== "") {
                     this[i].classList.remove(classes[j]);
                 }
@@ -104,10 +104,10 @@
             return;
         }
 
-        for (var i = 0; i < this.length; i++) {
-            var classes = cssClass.split(" ");
+        for (let i = 0; i < this.length; i++) {
+            let classes = cssClass.split(" ");
 
-            for (var j = 0; j < classes.length; j++) {
+            for (let j = 0; j < classes.length; j++) {
                 if (classes[j] !== "") {
                     this[i].classList.add(classes[j]);
                 }
@@ -134,7 +134,7 @@
             return;
         }
 
-        for (var i = 0; i < this.length; i++) {
+        for (let i = 0; i < this.length; i++) {
 
             this[i].classList.toggle(cssClass);
         }
@@ -153,7 +153,7 @@
                 cancelable: false,
                 detail: undefined
             };
-            var evt = document.createEvent('CustomEvent');
+            let evt = document.createEvent('CustomEvent');
             evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
             return evt;
         };
@@ -172,9 +172,9 @@
             evt = [evt];
         }
 
-        for (var i = 0; i < this.length; i++) {
+        for (let i = 0; i < this.length; i++) {
 
-            for (var j = 0; j < evt.length; j++) {
+            for (let j = 0; j < evt.length; j++) {
 
                 this[i].addEventListener(evt[j], fn, bubble);
 
@@ -188,7 +188,7 @@
 
     dollarbill.fn.off = function (evt, fn, bubble) {
 
-        for (var i = 0; i < this.length; i++) {
+        for (let i = 0; i < this.length; i++) {
             this[i].removeEventListener(evt, fn, bubble);
         }
 
@@ -202,7 +202,7 @@
             return this;
         }
 
-        var i = 0,
+        let i = 0,
             event = new CustomEvent(eventType, extraParameters);
 
         for (; i < this.length; i++) {
@@ -215,7 +215,7 @@
     dollarbill.fn.value = function (value) {
 
         if (value) {
-            for (var i = 0; i < this.length; i++) {
+            for (let i = 0; i < this.length; i++) {
                 this[i].value = value;
             }
         } else {
@@ -234,7 +234,7 @@
 
     dollarbill.fn.toggleDisabled = function (state) {
 
-        for (var i = 0; i < this.length; i++) {
+        for (let i = 0; i < this.length; i++) {
             this[i].disabled = state;
             this[i].setAttribute("aria-disabled", state);
         }
@@ -245,7 +245,7 @@
 
     dollarbill.fn.toggleFlex = function (state) {
 
-        for (var i = 0; i < this.length; i++) {
+        for (let i = 0; i < this.length; i++) {
 
             if (!state) //display
             {
@@ -269,21 +269,24 @@
     dollarbill.fn.html = function (value) {
 
         if (value !== undefined) {
-            for (var i = 0; i < this.length; i++) {
+
+            for (let i = 0; i < this.length; i++) {
+  
                 this[i].innerHTML = value;
+  
             }
+
         } else {
             return this[0].innerHTML;
         }
 
     };
 
-
     dollarbill.fn.before = function (value) {
 
         if (value !== undefined) {
 
-            for (var i = 0; i < this.length; i++) {
+            for (let i = 0; i < this.length; i++) {
 
                 this[i].insertAdjacentHTML("afterbegin", value);
             }
@@ -298,7 +301,7 @@
 
         if (value !== undefined) {
 
-            for (var i = 0; i < this.length; i++) {
+            for (let i = 0; i < this.length; i++) {
 
                 this[i].insertAdjacentHTML("afterend", value);
 
@@ -308,15 +311,16 @@
 
         } else {
 
-            return this[0].outerHTML;
+            return this;
 
         }
+
     };
 
     dollarbill.fn.text = function (value) {
 
         if (value) {
-            for (var i = 0; i < this.length; i++) {
+            for (let i = 0; i < this.length; i++) {
                 this[i].innerText = value;
             }
         } else {
@@ -328,7 +332,7 @@
     dollarbill.fn.value = function (value) {
 
         if (value) {
-            for (var i = 0; i < this.length; i++) {
+            for (let i = 0; i < this.length; i++) {
                 this[i].value = value;
             }
         } else {
@@ -342,7 +346,7 @@
     dollarbill.fn.checked = function (value) {
 
         if (value !== undefined) {
-            for (var i = 0; i < this.length; i++) {
+            for (let i = 0; i < this.length; i++) {
                 this[i].checked = value;
             }
         } else {
@@ -370,7 +374,7 @@
     dollarbill.fn.type = function (value) {
 
         if (value !== undefined) {
-            for (var i = 0; i < this.length; i++) {
+            for (let i = 0; i < this.length; i++) {
                 this[i].type = value;
             }
         } else {
@@ -385,7 +389,7 @@
 
         if (value) {
 
-            for (var i = 0; i < this.length; i++) {
+            for (let i = 0; i < this.length; i++) {
                 this[i].setAttribute(name, value);
             }
 
