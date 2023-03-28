@@ -5,6 +5,7 @@
 /**
 
 A lightweight, custom helper library with a collection of utility methods based on jQuery's example.
+* @section
 @namespace
 @param {(string|Object|Array|Function)} selector - A string containing a selector expression, an HTML string, or a DOM element.
 @param {Object} [context=document] - A DOM element within which a matching element may be found.
@@ -20,22 +21,27 @@ var $introElements = $('.intro', document.getElementById('content'));
     "use strict";
 
     /**
+     * The dollarbill namespace.
+     * @namespace dollarbill
+     */
 
-The main function of the dollarbill library.
-@function
-@alias $
-@param {string|HTMLElement} selector - A CSS selector string or an HTML element.
-@param {HTMLElement} context - The context in which to search for the selector.
-@returns {Object} - An object containing the selected elements.
-@throws {TypeError} - If the selector parameter is not a string or an HTMLElement.
-@example
-// Select all div elements on the page:
-let divs = $("div");
-// Select the element with ID "my-element":
-let myElement = $("#my-element");
-*/
+    /**
+     * Creates a new instance of the dollarbill object.
+     *
+     * @constructor
+     * @param {string|Node|NodeList|Array.<Node>} selector - The selector for the elements to be selected.
+     * @param {Node} [context=document] - The context within which to search for the selector.
+     * @returns {dollarbill} A new instance of the dollarbill object.
+     * @memberOf dollarbill
+     */
     let dbl = function (selector, context) {
 
+        /** 
+         * The dollarbill object constructor.
+         * @constructs dollarbill
+         * @namespace dollarbill.fn.init
+         * @private
+         */
         let db = new dbl.fn.init(selector, context),
             nodes, i;
 
@@ -76,9 +82,10 @@ let myElement = $("#my-element");
 
     };
 
+
     /**
-     * The prototype object for the dollarbill library.
-     * @namespace
+     * The prototype for the dollarbill object.
+     * @namespace dollarbill.fn
      */
     dbl.fn = dbl.prototype = {
 
@@ -133,6 +140,7 @@ let myElement = $("#my-element");
     };
 
     /**
+     * @section
      * A function that does nothing.
      *
      * @function
@@ -142,33 +150,35 @@ let myElement = $("#my-element");
      */
     dbl.noop = function () { };
 
-    // Give the init function the dbl prototype for later instantiation
     /**
-     * Initializes the dollarbill object and sets its prototype to the dbl prototype.
+     * @section
+     * The initialization function for the dollarbill library.
      *
-     * @constructor
      * @function
      * @name dbl.fn.init
-     * @returns {Object} The dollarbill object.
+     * @returns {dollarbill} The dollarbill library object.
      */
     dbl.fn.init.prototype = dbl.fn;
 
     /**
-     * The dollarbill object is set to the dbl function for global use, with the $ alias also assigned to it.
-     *
-     * @namespace
-     * @name window
+     * @section     
+     * The `window` namespace containing global objects and functions.
+     * @namespace window
      * @property {Object} dollarbill - The dollarbill object.
-     * @property {Object} $ - The dollarbill object, with the $ alias.
+     * @property {Object} $ - The dollarbill object, with the `$` alias.
      */
     window.dollarbill = window.$ = dbl;
 
+
     /**
-    
-    Removes the specified class(es) from the DOM element(s) in the collection.
-    @param {string} cssClass - The class(es) to remove, separated by spaces.
-    @returns {object} - The dollarbill object for chaining.
-    */
+     * @section
+     * Removes the specified class(es) from the DOM element(s) in the collection.
+     * @function
+     * @memberof dollarbill.fn
+     * @name removeClass
+     * @param {string} cssClass - The class(es) to remove, separated by spaces.
+     * @returns {dollarbill} - The dollarbill object for chaining.
+     */
     dollarbill.fn.removeClass = function (cssClass) {
 
         if (!cssClass || typeof cssClass !== "string") {
@@ -192,11 +202,13 @@ let myElement = $("#my-element");
     };
 
     /**
- * Adds one or more CSS classes to each element in the current selection.
- *
- * @param {string} cssClass - One or more CSS classes to add, separated by spaces.
- * @returns {object} - The current dollarbill object for chaining.
- */
+     * @section
+     * Adds the specified CSS class(es) to the DOM element(s) in the collection.
+     * @memberOf dollarbill
+     * @function
+     * @param {string} cssClass - The class(es) to add, separated by spaces.
+     * @returns {Object} - The dollarbill object for chaining.
+     */
     dollarbill.fn.addClass = function (cssClass) {
 
         if (!cssClass || typeof cssClass !== "string") {
@@ -220,11 +232,14 @@ let myElement = $("#my-element");
     };
 
     /**
-* Checks if the first element in the collection has the specified CSS class.
-*
-* @param {string} cssClass - The CSS class to check for.
-* @returns {boolean|dbl} - Returns `true` if the first element has the class; returns `false` if not. If `cssClass` is not a string, returns the current `dbl` object.
-*/
+     * @section
+     * Checks if an element has a CSS class.
+     *
+     * @memberOf dollarbill
+     * @function
+     * @param {string} cssClass - The name of the CSS class to check for.
+     * @returns {boolean} - True if the element has the CSS class, false otherwise.
+     */
     dollarbill.fn.hasClass = function (cssClass) {
 
         if (!cssClass || typeof cssClass !== "string") {
@@ -237,11 +252,14 @@ let myElement = $("#my-element");
 
 
     /**
-  
-  Toggles the specified class on the selected elements.
-  @param {string} cssClass - The class name to toggle.
-  @returns {Object} - The dollarbill object.
-  */
+     * @section
+     * Toggles the specified class on the selected elements.
+     *
+     * @memberOf dollarbill
+     * @function
+     * @param {string} cssClass - The name of the CSS class to toggle.
+     * @returns {Object} - The dollarbill object for chaining.
+     */
     dollarbill.fn.toggleClass = function (cssClass) {
 
         if (!cssClass || typeof cssClass !== "string") {
@@ -258,23 +276,28 @@ let myElement = $("#my-element");
     };
 
     /**
-  
-  Polyfill for CustomEvent in case it is not supported by the browser.
-  https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent
-  @param {string} event - The name of the custom event to create.
-  @param {object} params - The parameters to configure the custom event. This is optional and defaults to {bubbles: false, cancelable: false, detail: undefined}.
-  @return {CustomEvent} The custom event object.
-  */
+     * @section
+     * Polyfill for CustomEvent in case it is not supported by the browser.
+     * @function
+     * @param {string} event - The name of the custom event to create.
+     * @param {Object} [params] - The parameters to configure the custom event. This is optional and defaults to {bubbles: false, cancelable: false, detail: undefined}.
+     * @returns {CustomEvent} The custom event object.
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent
+     */
     if (!window.CustomEvent) {
 
         function CustomEvent(event, params) {
+
             params = params || {
                 bubbles: false,
                 cancelable: false,
                 detail: undefined
             };
+
             let evt = document.createEvent('CustomEvent');
+
             evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+
             return evt;
         };
 
@@ -285,13 +308,15 @@ let myElement = $("#my-element");
     }
 
     /**
-
-Attaches an event listener to the selected element(s).
-@param {string|string[]} evt - The event name(s) to listen for.
-@param {function} fn - The function to execute when the event is triggered.
-@param {boolean} [bubble=false] - Indicates whether the event should propagate up through the DOM or not.
-@returns {object} - The dollarbill object to allow for method chaining.
-*/
+     * @section
+     * Attaches an event listener to the selected element(s).
+     * @memberOf dollarbill
+     * @function
+     * @param {string|string[]} evt - The event name(s) to listen for.
+     * @param {function} fn - The function to execute when the event is triggered.
+     * @param {boolean} [bubble=false] - Indicates whether the event should propagate up through the DOM or not.
+     * @returns {Object} - The dollarbill object to allow for method chaining.
+     */
     dollarbill.fn.on = function (evt, fn, bubble) {
 
         bubble = (bubble === true) ? true : false;
@@ -315,8 +340,11 @@ Attaches an event listener to the selected element(s).
     };
 
     /**
+     * @section
  * Removes an event listener from the selected element(s).
+     * @memberOf dollarbill
  *
+      * @function
  * @param {string} evt - The event type to remove.
  * @param {function} fn - The listener function to remove.
  * @param {boolean} [bubble=false] - Optional boolean value indicating whether or not to remove the listener during the bubbling or capturing phase. Default is false (bubbling phase).
@@ -333,12 +361,15 @@ Attaches an event listener to the selected element(s).
     };
 
     /**
-
-Trigger a specified event on all elements in the current selection.
-@param {string} eventType - The name of the event to trigger.
-@param {Object} [extraParameters] - Optional parameters to pass to the event.
-@returns {dollarbill} The dollarbill object for chaining.
-*/
+     * @section
+     * Triggers a specified event on all elements in the current selection.
+     * 
+     * @memberOf dollarbill
+     * @function
+     * @param {string} eventType - The name of the event to trigger.
+     * @param {Object} [extraParameters] - Optional parameters to pass to the event.
+     * @returns {dollarbill} - The dollarbill object for chaining.
+     */
     dollarbill.fn.trigger = function (eventType, extraParameters) {
 
         if (!eventType) {
@@ -356,11 +387,14 @@ Trigger a specified event on all elements in the current selection.
     };
 
     /**
- * Gets or sets the value property of the first element in the collection.
- *
- * @param {string} [value] - The value to set on the elements.
- * @returns {(string|undefined|dollarbill)} - The value of the first element if no parameter is passed, `undefined` if there are no elements, and the `dollarbill` object otherwise.
- */
+     * @section
+     * Gets or sets the value property of the first element in the collection.
+     *
+     * @function
+     * @memberof dollarbill.fn
+     * @param {string} [value] - The value to set on the elements.
+     * @returns {(string|undefined|dollarbill)} - The value of the first element if no parameter is passed, `undefined` if there are no elements, and the `dollarbill` object otherwise.
+     */
     dollarbill.fn.value = function (value) {
 
         if (value) {
@@ -386,11 +420,14 @@ Trigger a specified event on all elements in the current selection.
     };
 
     /**
-
-Toggles the disabled state and the aria-disabled attribute of the selected elements.
-@param {boolean} state - The desired state of the disabled attribute (true for disabled, false for enabled).
-@returns {dollarbill} - The dollarbill object for method chaining.
-*/
+     * @section
+     * Toggles the disabled state and the aria-disabled attribute of the selected elements.
+     *
+     * @memberOf dollarbill
+     * @function
+     * @param {boolean} state - The desired state of the disabled attribute (true for disabled, false for enabled).
+     * @returns {dollarbill} - The dollarbill object for method chaining.
+     */
     dollarbill.fn.toggleDisabled = function (state) {
 
         for (let i = 0; i < this.length; i++) {
@@ -403,13 +440,14 @@ Toggles the disabled state and the aria-disabled attribute of the selected eleme
     };
 
     /**
- * Toggles the display of an element between "none" and "flex".
- * 
- * @param {Boolean} state - Whether to show the element or not. 
- * If false, the element is hidden with "d-none" class, otherwise it's displayed with "d-flex" class.
- * 
- * @returns {Object} The dollarbill object.
- */
+     * @section
+     * Toggles the display of an element between "none" and "flex".
+     *
+     * @memberOf dollarbill
+     * @function
+     * @param {boolean} state - Whether to show the element or not. If false, the element is hidden with "d-none" class, otherwise it's displayed with "d-flex" class.
+     * @returns {Object} - The dollarbill object to allow for method chaining.
+     */
     dollarbill.fn.toggleFlex = function (state) {
 
         for (let i = 0; i < this.length; i++) {
@@ -434,11 +472,14 @@ Toggles the disabled state and the aria-disabled attribute of the selected eleme
     };
 
     /**
-
-Sets or gets the HTML content of the selected element(s).
-@param {string} value - The HTML content to set.
-@returns {string|object} - The HTML content of the first selected element, or the dollarbill object.
-*/
+     * @section
+     * Sets or gets the HTML content of the selected element(s).
+     * 
+     * @memberOf dollarbill
+     * @function
+     * @param {string} value - The HTML content to set.
+     * @returns {(string|object)} - The HTML content of the first selected element, or the dollarbill object.
+     */
     dollarbill.fn.html = function (value) {
 
         if (value !== undefined) {
@@ -452,10 +493,14 @@ Sets or gets the HTML content of the selected element(s).
     };
 
     /**
- * Inserts the given content before the first child of each element in the current selection.
- * @param {string} value - The content to insert before the first child element.
- * @returns {dollarbill} The current dollarbill object.
- */
+     * @section
+     * Inserts the given content before the first child of each element in the current selection.
+     * 
+     * @memberOf dollarbill
+     * @function
+     * @param {string} value - The content to insert before the first child element.
+     * @returns {dollarbill} The current dollarbill object.
+     */
     dollarbill.fn.before = function (value) {
 
         if (value !== undefined) {
@@ -472,13 +517,16 @@ Sets or gets the HTML content of the selected element(s).
     };
 
     /**
+     * @section
      * Inserts content after each element in the current set of matched elements.
      *
-     * @param {string} value - The HTML string, DOM element(s), or jQuery object(s) to insert after the matched elements.
-     * 
-     * @returns {dollarbill} - The dollarbill object.
+     * @memberOf dollarbill
+     * @function
+     * @memberOf dollarbill.fn
+     * @param {string} value - The HTML string, DOM element(s), or dollarbill object(s) to insert after the matched elements.
+     * @returns {dollarbill} - The dollarbill object for method chaining.
      */
-    dollarbill.fn.after = function (value) {
+        dollarbill.fn.after = function (value) {
 
         if (value !== undefined) {
 
@@ -499,9 +547,12 @@ Sets or gets the HTML content of the selected element(s).
     };
 
     /**
+     * @section
      * Sets or gets the innerText content of the first element in the selected elements.
+     * 
+     * @memberOf dollarbill
      * @param {string} value - The text content to set.
-     * @returns {string|dollarbill} - If the value parameter is not provided, returns the innerText content of the first element, otherwise returns the dollarbill object.
+     * @returns {(string|dollarbill)} - If the value parameter is not provided, returns the innerText content of the first element, otherwise returns the dollarbill object.
      */
     dollarbill.fn.text = function (value) {
 
@@ -516,12 +567,14 @@ Sets or gets the HTML content of the selected element(s).
     };
 
     /**
- * Set or get the value property of the first element in the dollarbill collection.
- * @function
- * @memberof dollarbill.fn
- * @param {string} [value] - The value to set for the element.
- * @returns {string|undefined|dollarbill} - If a value is provided, the function sets the value of the property for all elements in the collection and returns the dollarbill object. If no value is provided, the function returns the value of the property for the first element in the collection. If the collection is empty, the function returns undefined.
- */
+     * @section
+    * Set or get the value property of the first element in the dollarbill collection.
+    * @function
+    * @memberof dollarbill.fn
+    * @param {string} [value] - The value to set for the element.
+    * @returns {string|undefined|dollarbill} - If a value is provided, the function sets the value of the property for all elements in the collection and returns the dollarbill object. If no value is provided, the function returns the value of the property for the first element in the collection. If the collection is empty, the function returns undefined.
+    */
+
     dollarbill.fn.value = function (value) {
 
         if (value) {
@@ -537,11 +590,14 @@ Sets or gets the HTML content of the selected element(s).
     };
 
     /**
-
-Sets or gets the checked state of the first element in the collection.
-@param {boolean} value - The value to set the checked state to.
-@returns {boolean|dollarbill} - If the value parameter is not passed, returns a boolean indicating the checked state of the first element in the collection. If the value parameter is passed, returns the dollarbill object to allow for method chaining.
-*/
+     * @section
+     * Sets or gets the checked state of the first element in the collection.
+     * @memberOf dollarbill
+     * 
+    * @function
+     * @param {boolean} value - The value to set the checked state to.
+     * @returns {boolean|dollarbill} - If the value parameter is not passed, returns a boolean indicating the checked state of the first element in the collection. If the value parameter is passed, returns the dollarbill object to allow for method chaining.
+     */
     dollarbill.fn.checked = function (value) {
 
         if (value !== undefined) {
@@ -555,12 +611,15 @@ Sets or gets the checked state of the first element in the collection.
     };
 
     /**
-
-Appends the given content to the first element in the current Dollarbill object.
-If the content is a string, it will be converted to a new DOM element before being appended.
-@param {Node|string} content - The content to append.
-@returns {Dollarbill} The Dollarbill object for chaining.
-*/
+     * @section
+     * Appends the given content to the first element in the current Dollarbill object.
+     * If the content is a string, it will be converted to a new DOM element before being appended.
+     *
+     * @memberOf dollarbill
+    * @function
+     * @param {Node|string} content - The content to append.
+     * @returns {Dollarbill} - The Dollarbill object for method chaining.
+     */
     dollarbill.fn.append = function (content) {
 
         if (!content) {
@@ -578,13 +637,15 @@ If the content is a string, it will be converted to a new DOM element before bei
     };
 
     /**
- * Set or get the type attribute of the first element in the current collection.
- * 
- * @param {string} [value] - The value to set as the type attribute.
- * 
- * @returns {(string|dollarbill)} - If a value is provided, returns the dollarbill object for chaining; 
- * otherwise, returns the type attribute of the first element in the collection.
- */
+     * @section
+     * Sets or gets the type attribute of the first element in the current collection.
+     * 
+     * @memberOf dollarbill
+    * @function
+     * @param {string} [value] - The value to set as the type attribute.
+     * @returns {(string|dollarbill)} - If a value is provided, returns the dollarbill object for chaining; 
+     * otherwise, returns the type attribute of the first element in the collection. If the collection is empty, returns undefined.
+     */
     dollarbill.fn.type = function (value) {
 
         if (value !== undefined) {
@@ -600,12 +661,14 @@ If the content is a string, it will be converted to a new DOM element before bei
     };
 
     /**
-    
-    Set or get the value of an attribute on the first element of the collection or set the value for all elements in the collection.
-    @param {string} name - The name of the attribute to set or get.
-    @param {string} [value] - The value to set for the attribute.
-    @returns {string|undefined|Object} - If value is provided, it returns the instance of the dollarbill object with the attribute set to the provided value for all elements in the collection. If value is not provided, it returns the value of the attribute for the first element in the collection. If the collection is empty, undefined is returned.
-    */
+     * @section
+     * Sets or gets the value of an attribute on the first element of the collection or sets the value for all elements in the collection.
+     * @memberOf dollarbill
+    * @function
+     * @param {string} name - The name of the attribute to set or get.
+     * @param {string} [value] - The value to set for the attribute.
+     * @returns {(string|undefined|dollarbill)} - If the value parameter is provided, returns the dollarbill object with the attribute set to the provided value for all elements in the collection. If the value parameter is not provided, returns the value of the attribute for the first element in the collection. If the collection is empty, undefined is returned.
+     */
     dollarbill.fn.attr = function (name, value) {
 
         if (value) {
