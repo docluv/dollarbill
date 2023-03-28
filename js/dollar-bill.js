@@ -278,6 +278,41 @@
 
     };
 
+
+    dollarbill.fn.before = function (value) {
+
+        if (value !== undefined) {
+
+            for (var i = 0; i < this.length; i++) {
+
+                this[i].insertAdjacentHTML("afterbegin", value);
+            }
+
+        } else {
+            return this;
+        }
+
+    };
+
+    dollarbill.fn.after = function (value) {
+
+        if (value !== undefined) {
+
+            for (var i = 0; i < this.length; i++) {
+
+                this[i].insertAdjacentHTML("afterend", value);
+
+            }
+
+            return this;
+
+        } else {
+
+            return this[0].outerHTML;
+
+        }
+    };
+
     dollarbill.fn.text = function (value) {
 
         if (value) {
