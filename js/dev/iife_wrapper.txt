@@ -2,7 +2,21 @@
 //utility methods based on jQuery's example.
 ;
 
-( function ( window, undefined ) {
+/**
+
+A lightweight, custom helper library with a collection of utility methods based on jQuery's example.
+* @section
+@namespace
+@param {(string|Object|Array|Function)} selector - A string containing a selector expression, an HTML string, or a DOM element.
+@param {Object} [context=document] - A DOM element within which a matching element may be found.
+@returns {Object} A new instance of the dbl object.
+@example
+// Returns a new instance of the dbl object with all h1 elements on the page.
+var $headings = $('h1');
+// Returns a new instance of the dbl object with all elements with the class "intro" within the element with the ID "content".
+var $introElements = $('.intro', document.getElementById('content'));
+*/
+(function (window, undefined) {
 
     "use strict";
 

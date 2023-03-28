@@ -275,37 +275,6 @@ var $introElements = $('.intro', document.getElementById('content'));
 
     };
 
-    /**
-     * @section
-     * Polyfill for CustomEvent in case it is not supported by the browser.
-     * @function
-     * @param {string} event - The name of the custom event to create.
-     * @param {Object} [params] - The parameters to configure the custom event. This is optional and defaults to {bubbles: false, cancelable: false, detail: undefined}.
-     * @returns {CustomEvent} The custom event object.
-     * @see https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent
-     */
-    if (!window.CustomEvent) {
-
-        function CustomEvent(event, params) {
-
-            params = params || {
-                bubbles: false,
-                cancelable: false,
-                detail: undefined
-            };
-
-            let evt = document.createEvent('CustomEvent');
-
-            evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
-
-            return evt;
-        };
-
-        CustomEvent.prototype = window.CustomEvent.prototype;
-
-        window.CustomEvent = CustomEvent;
-
-    }
 
     /**
      * @section
@@ -371,16 +340,19 @@ var $introElements = $('.intro', document.getElementById('content'));
      * @returns {dollarbill} - The dollarbill object for chaining.
      */
     dollarbill.fn.trigger = function (eventType, extraParameters) {
-
         if (!eventType) {
             return this;
         }
 
-        let i = 0,
-            event = new CustomEvent(eventType, extraParameters);
+        let i = 0;
+        const event = new Event(eventType, {
+            bubbles: true,
+            cancelable: true,
+            detail: extraParameters
+        });
 
         for (; i < this.length; i++) {
-            elem.dispatchEvent(event);
+            this[i].dispatchEvent(event);
         }
 
         return this;
@@ -685,6 +657,40 @@ var $introElements = $('.intro', document.getElementById('content'));
 
             }
 
+        }
+
+    };
+
+
+    dollarbill.fn.removeAttr = function (name) {
+
+        if (!this[0]) {
+            return this;
+        }
+
+        var i = 0;
+
+        for (; i < this.length; i++) {
+            this[i].removeAttribute(name);
+        }
+
+        return this;
+    };
+
+    dollarbill.fn.data = function (name, val) {
+
+        //TODO: modify this to allow an object of name - values to be passed & set
+
+        var elem = this[i];
+
+        if (!val) {
+
+            return (elem.hasAttribute("data-" + name) ?
+                elem.getAttribute("data-" + name) : "");
+
+        } else {
+            elem.setAttribute("data-" + name, val);
+            return;
         }
 
     };

@@ -19,18 +19,18 @@ let destPath = "../js/",
         }
     };
 
-let wrapper = utils.readFile( srcPath + "iife_wrapper.txt" ),
-    core = utils.readFile( srcPath + "dollar-bill.js" ),
-    //use args for included modules
-    css = utils.readFile( srcPath + "dollar-bill.cssClass.js" ),
-    element = utils.readFile( srcPath + "dollar-bill.element.js" ),
-    events = utils.readFile( srcPath + "dollar-bill.events.js" );
+// let wrapper = utils.readFile( srcPath + "iife_wrapper.txt" ),
+//     core = utils.readFile( srcPath + "dollar-bill.js" ),
+//     //use args for included modules
+//     css = utils.readFile( srcPath + "dollar-bill.cssClass.js" ),
+//     element = utils.readFile( srcPath + "dollar-bill.element.js" ),
+//     events = utils.readFile( srcPath + "dollar-bill.events.js" );
 
-let code = core + "\r\n" + css + "\r\n" + events + "\r\n" + element;
+// let code = core + "\r\n" + css + "\r\n" + events + "\r\n" + element;
 
-code = wrapper.replace( /{{{code}}}/gi, code );
+// code = wrapper.replace( /{{{code}}}/gi, code );
 
-utils.createFile( destPath + "dollar-bill.js", code, true );
+//utils.createFile( destPath + "dollar-bill.js", code, true );
 
 utils.createFile( destPath + "dollar-bill.min.js",
-    UglifyJS.minify( code, options ).code, true );
+    UglifyJS.minify(utils.readFile(destPath + "dollar-bill.js"), options ).code, true );
