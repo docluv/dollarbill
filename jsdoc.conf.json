@@ -1,0 +1,20 @@
+{
+    "source": {
+        "include": [
+            "./js/dollar-bill.js"
+        ],
+        "exclude": [
+            "./node_modules"
+        ]
+    },
+    "plugins": [
+        "plugins/markdown"
+    ],
+    "opts": {
+        "destination": "./docs"
+    },
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false
+    }
+}

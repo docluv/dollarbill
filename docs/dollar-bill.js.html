@@ -1,4 +1,32 @@
-//dollar bill is a simple, custom helper library with a collection of
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: dollar-bill.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: dollar-bill.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>//dollar bill is a simple, custom helper library with a collection of
 //utility methods based on jQuery's example.
 ;
 
@@ -49,7 +77,7 @@ let myElement = $("#my-element");
 
         if (typeof selector === "string") {
 
-            if (context && context.nodeType) {
+            if (context &amp;&amp; context.nodeType) {
                 nodes = context.querySelectorAll(selector);
             } else {
                 nodes = document.querySelectorAll(selector);
@@ -58,7 +86,7 @@ let myElement = $("#my-element");
             db.length = nodes.length;
             db.selector = selector;
 
-            for (i = 0; i < nodes.length; i++) {
+            for (i = 0; i &lt; nodes.length; i++) {
                 db[i] = nodes[i];
             }
 
@@ -175,11 +203,11 @@ let myElement = $("#my-element");
             return;
         }
 
-        for (let i = 0; i < this.length; i++) {
+        for (let i = 0; i &lt; this.length; i++) {
 
             let classes = cssClass.split(" ");
 
-            for (let j = 0; j < classes.length; j++) {
+            for (let j = 0; j &lt; classes.length; j++) {
                 if (classes[j] !== "") {
                     this[i].classList.remove(classes[j]);
                 }
@@ -203,10 +231,10 @@ let myElement = $("#my-element");
             return;
         }
 
-        for (let i = 0; i < this.length; i++) {
+        for (let i = 0; i &lt; this.length; i++) {
             let classes = cssClass.split(" ");
 
-            for (let j = 0; j < classes.length; j++) {
+            for (let j = 0; j &lt; classes.length; j++) {
 
                 if (classes[j] !== "") {
                     this[i].classList.add(classes[j]);
@@ -248,7 +276,7 @@ let myElement = $("#my-element");
             return;
         }
 
-        for (let i = 0; i < this.length; i++) {
+        for (let i = 0; i &lt; this.length; i++) {
 
             this[i].classList.toggle(cssClass);
         }
@@ -300,9 +328,9 @@ Attaches an event listener to the selected element(s).
             evt = [evt];
         }
 
-        for (let i = 0; i < this.length; i++) {
+        for (let i = 0; i &lt; this.length; i++) {
 
-            for (let j = 0; j < evt.length; j++) {
+            for (let j = 0; j &lt; evt.length; j++) {
 
                 this[i].addEventListener(evt[j], fn, bubble);
 
@@ -324,7 +352,7 @@ Attaches an event listener to the selected element(s).
  */
     dollarbill.fn.off = function (evt, fn, bubble) {
 
-        for (let i = 0; i < this.length; i++) {
+        for (let i = 0; i &lt; this.length; i++) {
             this[i].removeEventListener(evt, fn, bubble);
         }
 
@@ -348,7 +376,7 @@ Trigger a specified event on all elements in the current selection.
         let i = 0,
             event = new CustomEvent(eventType, extraParameters);
 
-        for (; i < this.length; i++) {
+        for (; i &lt; this.length; i++) {
             elem.dispatchEvent(event);
         }
 
@@ -364,7 +392,7 @@ Trigger a specified event on all elements in the current selection.
     dollarbill.fn.value = function (value) {
 
         if (value) {
-            for (let i = 0; i < this.length; i++) {
+            for (let i = 0; i &lt; this.length; i++) {
                 this[i].value = value;
             }
         } else {
@@ -393,7 +421,7 @@ Toggles the disabled state and the aria-disabled attribute of the selected eleme
 */
     dollarbill.fn.toggleDisabled = function (state) {
 
-        for (let i = 0; i < this.length; i++) {
+        for (let i = 0; i &lt; this.length; i++) {
             this[i].disabled = state;
             this[i].setAttribute("aria-disabled", state);
         }
@@ -412,7 +440,7 @@ Toggles the disabled state and the aria-disabled attribute of the selected eleme
  */
     dollarbill.fn.toggleFlex = function (state) {
 
-        for (let i = 0; i < this.length; i++) {
+        for (let i = 0; i &lt; this.length; i++) {
 
             if (!state) //display
             {
@@ -442,7 +470,7 @@ Sets or gets the HTML content of the selected element(s).
     dollarbill.fn.html = function (value) {
 
         if (value !== undefined) {
-            for (let i = 0; i < this.length; i++) {
+            for (let i = 0; i &lt; this.length; i++) {
                 this[i].innerHTML = value;
             }
         } else {
@@ -460,7 +488,7 @@ Sets or gets the HTML content of the selected element(s).
 
         if (value !== undefined) {
 
-            for (let i = 0; i < this.length; i++) {
+            for (let i = 0; i &lt; this.length; i++) {
 
                 this[i].insertAdjacentHTML("afterbegin", value);
             }
@@ -482,7 +510,7 @@ Sets or gets the HTML content of the selected element(s).
 
         if (value !== undefined) {
 
-            for (let i = 0; i < this.length; i++) {
+            for (let i = 0; i &lt; this.length; i++) {
 
                 this[i].insertAdjacentHTML("afterend", value);
 
@@ -506,7 +534,7 @@ Sets or gets the HTML content of the selected element(s).
     dollarbill.fn.text = function (value) {
 
         if (value) {
-            for (let i = 0; i < this.length; i++) {
+            for (let i = 0; i &lt; this.length; i++) {
                 this[i].innerText = value;
             }
         } else {
@@ -525,7 +553,7 @@ Sets or gets the HTML content of the selected element(s).
     dollarbill.fn.value = function (value) {
 
         if (value) {
-            for (let i = 0; i < this.length; i++) {
+            for (let i = 0; i &lt; this.length; i++) {
                 this[i].value = value;
             }
         } else {
@@ -545,7 +573,7 @@ Sets or gets the checked state of the first element in the collection.
     dollarbill.fn.checked = function (value) {
 
         if (value !== undefined) {
-            for (let i = 0; i < this.length; i++) {
+            for (let i = 0; i &lt; this.length; i++) {
                 this[i].checked = value;
             }
         } else {
@@ -567,7 +595,7 @@ If the content is a string, it will be converted to a new DOM element before bei
             return this;
         }
 
-        if (!content.nodeType && typeof content === "string") {
+        if (!content.nodeType &amp;&amp; typeof content === "string") {
             content = document.createElement(content);
         }
 
@@ -588,7 +616,7 @@ If the content is a string, it will be converted to a new DOM element before bei
     dollarbill.fn.type = function (value) {
 
         if (value !== undefined) {
-            for (let i = 0; i < this.length; i++) {
+            for (let i = 0; i &lt; this.length; i++) {
                 this[i].type = value;
             }
         } else {
@@ -610,7 +638,7 @@ If the content is a string, it will be converted to a new DOM element before bei
 
         if (value) {
 
-            for (let i = 0; i < this.length; i++) {
+            for (let i = 0; i &lt; this.length; i++) {
                 this[i].setAttribute(name, value);
             }
 
@@ -626,4 +654,26 @@ If the content is a string, it will be converted to a new DOM element before bei
 
     };
 
-}(window));
+}(window));</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Namespaces</h3><ul><li><a href="$.fn.html">fn</a></li><li><a href="window.html">window</a></li></ul><h3>Classes</h3><ul><li><a href="$_constructor.html">constructor</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$">$</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue Mar 28 2023 10:12:47 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
