@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/docluv/dollarbill.png?label=ready&title=Ready)](https://waffle.io/docluv/dollarbill)
 # DollarBill
 ## A microjs jQuery compatible library
 
