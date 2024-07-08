@@ -82,7 +82,6 @@ var $introElements = $('.intro', document.getElementById('content'));
 
     };
 
-
     /**
      * The prototype for the dollarbill object.
      * @namespace dollarbill.fn
@@ -169,7 +168,6 @@ var $introElements = $('.intro', document.getElementById('content'));
      */
     window.dollarbill = window.$ = dbl;
 
-
     /**
      * @section
      * Removes the specified class(es) from the DOM element(s) in the collection.
@@ -250,7 +248,6 @@ var $introElements = $('.intro', document.getElementById('content'));
 
     };
 
-
     /**
      * @section
      * Toggles the specified class on the selected elements.
@@ -274,7 +271,6 @@ var $introElements = $('.intro', document.getElementById('content'));
         return this;
 
     };
-
 
     /**
      * @section
@@ -498,7 +494,7 @@ var $introElements = $('.intro', document.getElementById('content'));
      * @param {string} value - The HTML string, DOM element(s), or dollarbill object(s) to insert after the matched elements.
      * @returns {dollarbill} - The dollarbill object for method chaining.
      */
-        dollarbill.fn.after = function (value) {
+    dollarbill.fn.after = function (value) {
 
         if (value !== undefined) {
 
@@ -529,11 +525,15 @@ var $introElements = $('.intro', document.getElementById('content'));
     dollarbill.fn.text = function (value) {
 
         if (value) {
+
             for (let i = 0; i < this.length; i++) {
                 this[i].innerText = value;
             }
+
         } else {
-            return this[0].innerText;
+
+            return this[0] ? this[0].innerText : "";
+
         }
 
     };
@@ -549,14 +549,18 @@ var $introElements = $('.intro', document.getElementById('content'));
 
     dollarbill.fn.value = function (value) {
 
-        if (value) {
+        if (!!value || value === "") {
+
             for (let i = 0; i < this.length; i++) {
                 this[i].value = value;
             }
+
         } else {
+
             if (this[0]) {
                 return this[0].value;
             }
+
         }
 
     };
@@ -573,11 +577,19 @@ var $introElements = $('.intro', document.getElementById('content'));
     dollarbill.fn.checked = function (value) {
 
         if (value !== undefined) {
+
             for (let i = 0; i < this.length; i++) {
+
                 this[i].checked = value;
+
             }
+
+            return this;
+
         } else {
-            return this[0].checked;
+
+            return this.length > 0 ? this[0].checked : undefined;
+
         }
 
     };
@@ -606,6 +618,21 @@ var $introElements = $('.intro', document.getElementById('content'));
 
         return this;
 
+    };
+
+    dollarbill.fn.appendHTML = function (html) {
+        if (!html) {
+            return this;
+        }
+
+        const tempElement = document.createElement('div');
+        tempElement.innerHTML = html;
+
+        while (tempElement.firstChild) {
+            this[0].appendChild(tempElement.firstChild);
+        }
+
+        return this;
     };
 
     /**
@@ -661,7 +688,6 @@ var $introElements = $('.intro', document.getElementById('content'));
 
     };
 
-
     dollarbill.fn.removeAttr = function (name) {
 
         if (!this[0]) {
@@ -681,7 +707,7 @@ var $introElements = $('.intro', document.getElementById('content'));
 
         //TODO: modify this to allow an object of name - values to be passed & set
 
-        var elem = this[i];
+        var elem = this[0];
 
         if (!val) {
 
@@ -691,6 +717,16 @@ var $introElements = $('.intro', document.getElementById('content'));
         } else {
             elem.setAttribute("data-" + name, val);
             return;
+        }
+
+    };
+
+    dollarbill.fn.focus = function () {
+
+        if (this[0]) {
+
+            return this[0].focus();
+
         }
 
     };
