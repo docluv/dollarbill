@@ -70,12 +70,17 @@ var $introElements = $('.intro', document.getElementById('content'));
 
         } else if (selector.nodeType) {
 
-            //if(!selector.length){
-            //    selector = [selector];
-            //}
-
             db[0] = selector;
-            db.length = (!selector.length) ? 1 : selector.length;
+            db.length = 1;
+
+        } else if (selector instanceof NodeList) {
+
+            db.length = selector.length;
+
+            for (i = 0; i < selector.length; i++) {
+                db[i] = selector[i];
+            }
+
         }
 
         return db;
@@ -168,6 +173,7 @@ var $introElements = $('.intro', document.getElementById('content'));
      */
     window.dollarbill = window.$ = dbl;
 
+
     /**
      * @section
      * Removes the specified class(es) from the DOM element(s) in the collection.
@@ -248,6 +254,7 @@ var $introElements = $('.intro', document.getElementById('content'));
 
     };
 
+
     /**
      * @section
      * Toggles the specified class on the selected elements.
@@ -271,6 +278,7 @@ var $introElements = $('.intro', document.getElementById('content'));
         return this;
 
     };
+
 
     /**
      * @section
@@ -594,6 +602,7 @@ var $introElements = $('.intro', document.getElementById('content'));
 
     };
 
+
     /**
      * @section
      * Appends the given content to the first element in the current Dollarbill object.
@@ -634,6 +643,7 @@ var $introElements = $('.intro', document.getElementById('content'));
 
         return this;
     };
+
 
     /**
      * @section
@@ -730,5 +740,26 @@ var $introElements = $('.intro', document.getElementById('content'));
         }
 
     };
+
+    dollarbill.fn.find = function (selector) {
+        if (!selector) {
+            return this;
+        }
+
+        // Use a more specific selector to exclude <option> elements
+        return new dbl(this[0].querySelectorAll('input[required], textarea[required], select[required]'));
+    };
+
+
+    dollarbill.fn.each = function (callback) {
+
+        for (let i = 0; i < this.length; i++) {
+            callback.call(this[i], i, this[i]);
+        }
+
+        return this;
+
+    }
+
 
 }(window));
